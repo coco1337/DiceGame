@@ -17,6 +17,8 @@ public class BuildManager : MonoBehaviour
     };
 
     var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+    
+    #if UNITY_EDITOR
     var buildSum = report.summary;
     
     switch (buildSum)
@@ -28,5 +30,6 @@ public class BuildManager : MonoBehaviour
         Debug.Log("Build failed");
         break;
     }
+    #endif
   }
 }
