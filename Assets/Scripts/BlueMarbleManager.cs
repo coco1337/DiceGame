@@ -4,44 +4,41 @@ using UnityEngine;
 
 public sealed class BlueMarbleManager : MonoBehaviour
 {
-    private static BlueMarbleManager instance;
+	[SerializeField] private BoardManager boardManager;
+	[SerializeField] private UIManager uiManager;
+	[SerializeField] private PlayerInfo playerPrefab;
+	[SerializeField] private List<PlayerInfo> playerList;
+	[SerializeField] private DiceManager dicemanager;
+	[SerializeField] private Dice dice;
 
-    [SerializeField] private BoardManager boardManager;
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private PlayerInfo playerPrefab;
-    [SerializeField] private List<PlayerInfo> playerList;
-    [SerializeField] private DiceManager dicemanager;
-    [SerializeField] private Dice dice;
+	private int turn;
+	int result = 0;
 
-    private int turn;
-    int result = 0;
-    private float playerHeightOffset = 1f;
+	public static BlueMarbleManager Instance { get; private set; }
+	public int GetBoardSize => boardManager.CellList.Count;
+	public BoardCell GetCell(int index) => boardManager.CellList[index];
+	public float PlayerHeightOffset { get; } = 1f;
 
-    public static BlueMarbleManager Instance => instance;
-    public int GetBoardSize => boardManager.CellList.Count;
-    public BoardCell GetCell(int index) => boardManager.CellList[index];
-    public float PlayerHeightOffset => playerHeightOffset;
+	private void Start()
+	{
+		Instance ??= this;
 
-    private void Start()
-    {
-        instance ??= this;
-
-        var p1 = Instantiate(playerPrefab, boardManager.CellList[0].transform);
-        p1.transform.localPosition = new Vector3(p1.transform.localPosition.x,
-          p1.transform.localPosition.y + playerHeightOffset, p1.transform.localPosition.z);
-        this.playerList.Add(p1);
-    }
+		var p1 = Instantiate(playerPrefab, boardManager.CellList[0].transform);
+		p1.transform.localPosition = new Vector3(p1.transform.localPosition.x,
+			p1.transform.localPosition.y + PlayerHeightOffset, p1.transform.localPosition.z);
+		this.playerList.Add(p1);
+	}
 
 
-    public void RollDice()
-    {
+	public void RollDice()
+	{
 
-        if (playerList[turn].CurrentMoving) return;
+		if (playerList[turn].CurrentMoving) return;
 
-        var result = dice.value;
-        uiManager.UpdateDiceResult(result);
-        playerList[turn].MoveTo(result);
-    }
+		var result = dice.value;
+		uiManager.UpdateDiceResult(result);
+		playerList[turn].MoveTo(result);
+	}
 
 
 }

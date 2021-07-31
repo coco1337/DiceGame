@@ -8,26 +8,22 @@ using Random = UnityEngine.Random;
 
 public sealed class UIManager : MonoBehaviour
 {
-    [SerializeField] private BlueMarbleManager bmm;
+	[SerializeField] private BlueMarbleManager bmm;
 
-    [SerializeField] private TextMeshProUGUI txtDiceResult;
+	[SerializeField] private TextMeshProUGUI txtDiceResult;
 
+	public DiceManager diceManager;
 
-    public DiceManager diceManager;
+	public TextMeshProUGUI valueText;
 
-    public TextMeshProUGUI valueText;
+	public void PlayerMovePoint()
+	{
+		int diceToMove = diceManager.totalValue;
+		valueText.text = diceToMove.ToString();
+	}
 
-
-    public void PlayerMovePoint()
-    {
-        int diceToMove = diceManager.totalValue;
-        valueText.text = diceToMove.ToString();
-    }
-
-    public void UpdateDiceResult(int d)
-    {
-        txtDiceResult.text = "result : " + d;
-    }
+	public void UpdateDiceResult(int d)
+	{
+		txtDiceResult.text = "result : " + d;
+	}
 }
-
-
