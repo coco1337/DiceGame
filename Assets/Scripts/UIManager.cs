@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -16,14 +17,13 @@ public sealed class UIManager : MonoBehaviour
 
 	public TextMeshProUGUI valueText;
 
+	public UnityEvent RollDicePlay;
+
 	public void PlayerMovePoint()
 	{
 		int diceToMove = diceManager.totalValue;
 		valueText.text = diceToMove.ToString();
-	}
 
-	public void UpdateDiceResult(int d)
-	{
-		txtDiceResult.text = "result : " + d;
+		RollDicePlay.Invoke();
 	}
 }

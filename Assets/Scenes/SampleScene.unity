@@ -1775,6 +1775,21 @@ MonoBehaviour:
   txtDiceResult: {fileID: 1490115634}
   diceManager: {fileID: 1542814547}
   valueText: {fileID: 1490115634}
+  RollDicePlay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1035261929}
+        m_TargetAssemblyTypeName: BlueMarbleManager, Assembly-CSharp
+        m_MethodName: RollDice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1029735045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1869,9 +1884,8 @@ MonoBehaviour:
   boardManager: {fileID: 1124899332}
   uiManager: {fileID: 1027359425}
   playerPrefab: {fileID: 3294929685254381405, guid: 0ec880e6aa77ea54990132dbb5a22558, type: 3}
+  dicemanager: {fileID: 1542814547}
   playerList: []
-  dicemanager: {fileID: 0}
-  dice: {fileID: 0}
 --- !u!4 &1035261930
 Transform:
   m_ObjectHideFlags: 0

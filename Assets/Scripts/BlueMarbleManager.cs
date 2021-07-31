@@ -7,9 +7,9 @@ public sealed class BlueMarbleManager : MonoBehaviour
 	[SerializeField] private BoardManager boardManager;
 	[SerializeField] private UIManager uiManager;
 	[SerializeField] private PlayerInfo playerPrefab;
-	[SerializeField] private List<PlayerInfo> playerList;
 	[SerializeField] private DiceManager dicemanager;
-	[SerializeField] private Dice dice;
+	[SerializeField] private List<PlayerInfo> playerList;
+
 
 	private int turn;
 	int result = 0;
@@ -30,15 +30,14 @@ public sealed class BlueMarbleManager : MonoBehaviour
 	}
 
 
-	public void RollDice()
-	{
+    public void RollDice()
+    {
 
-		if (playerList[turn].CurrentMoving) return;
+        if (playerList[turn].CurrentMoving) return;
 
-		var result = dice.value;
-		uiManager.UpdateDiceResult(result);
-		playerList[turn].MoveTo(result);
-	}
+		var result = dicemanager.totalValue;
+        playerList[turn].MoveTo(result);
+    }
 
 
 }

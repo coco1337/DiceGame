@@ -12,10 +12,10 @@ public sealed class BoardCell : MonoBehaviour
   {
     this.moveSpeed = Random.Range(0.5f, 1.5f);
   }
-  // Update is called once per frame
+
   private void Update()
   {
-    this.transform.position = new Vector3(this.transform.position.x, (Mathf.Sin(Time.time * moveSpeed) + 1) / 8,
-      this.transform.position.z);
+    this.transform.position = new Vector3(this.transform.position.x, 
+			(Mathf.Sin(Time.time * moveSpeed) + 1) / 8, this.transform.position.z);
   }
 }

@@ -13,11 +13,11 @@ public class Dice : MonoBehaviour
 
 	[HideInInspector]
 	public bool isRolling;
-	public Text sum;
-	public int value = 0;
+	
 	public float minRollForce;
 	public float maxRollForce;
 	private Rigidbody rb;
+	public int value;
 	public UnityEvent RollEvent;
 
 	private void Awake()
@@ -25,7 +25,6 @@ public class Dice : MonoBehaviour
 		rb = this.GetComponent<Rigidbody>();
 	}
 
-	// Update is called once per frame
 	private void Update()
 	{
 		if (isRolling == true)
@@ -34,7 +33,6 @@ public class Dice : MonoBehaviour
 			{
 				isRolling = false;
 				CalculateValue();
-				Debug.Log("첫번째 유니티이벤트");
 				RollEvent.Invoke();
 			}
 		}
@@ -42,17 +40,18 @@ public class Dice : MonoBehaviour
 
 	private void CalculateValue()
 	{
-		var upPosDot = Mathf.Abs(Vector3.Dot(Vector3.up, this.transform.up));
-		var rightPosDot = Mathf.Abs(Vector3.Dot(Vector3.up, this.transform.right));
-		var forwardPosDot = Mathf.Abs(Vector3.Dot(Vector3.up, this.transform.forward));
+		var upPosDot = Vector3.Dot(Vector3.up, this.transform.up);
+		var rightPosDot = Vector3.Dot(Vector3.up, this.transform.right);
+		var forwardPosDot = Vector3.Dot(Vector3.up, this.transform.forward);
 
-		if (upPosDot - 1 < 0.1f) value = 2;
-		if (upPosDot - -1 < 0.1f) value = 4;
-		if (rightPosDot - 1 < 0.1f) value = 3;
-		if (rightPosDot - -1 < 0.1f) value = 1;
-		if (forwardPosDot - 1 < 0.1f) value = 5;
-		if (forwardPosDot - -1 < 0.1f) value = 6;
-	}
+        if (System.Math.Abs(upPosDot - 1) < 0.1f) value = 2;
+        if (System.Math.Abs(upPosDot - -1) < 0.1f) value = 4;
+        if (System.Math.Abs(rightPosDot - 1) < 0.1f) value = 3;
+        if (System.Math.Abs(rightPosDot - -1) < 0.1f) value = 1;
+        if (System.Math.Abs(forwardPosDot - 1) < 0.1f) value = 5;
+        if (System.Math.Abs(forwardPosDot - -1) < 0.1f) value = 6;
+
+    }
 
 
 	public void AddForceToDice()
@@ -65,3 +64,7 @@ public class Dice : MonoBehaviour
 		}
 	}
 }
+
+
+
+                                                                                                   
