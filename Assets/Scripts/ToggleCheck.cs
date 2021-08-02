@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ToggleCheck : MonoBehaviour
+public sealed class ToggleCheck : MonoBehaviour
 {
 
 	public Toggle toggleCheck;

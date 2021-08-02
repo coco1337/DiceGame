@@ -1793,7 +1793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &691197983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2227,7 +2227,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1001 &808242618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2623,6 +2623,21 @@ MonoBehaviour:
   - {fileID: 856011768}
   - {fileID: 1323216662}
   myMoney: {fileID: 2130474212}
+  RollDiceBuyOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1027359425}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: BuildingBuyOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &966269463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3005,6 +3020,7 @@ MonoBehaviour:
   txtDiceResult: {fileID: 1490115634}
   diceManager: {fileID: 1542814547}
   valueText: {fileID: 1490115634}
+  BuyImage: {fileID: 691197984}
   RollDicePlay:
     m_PersistentCalls:
       m_Calls:
@@ -3116,6 +3132,21 @@ MonoBehaviour:
   playerPrefab: {fileID: 3294929685254381405, guid: 0ec880e6aa77ea54990132dbb5a22558, type: 3}
   dicemanager: {fileID: 1542814547}
   playerList: []
+  RollDiceBuyOn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1027359425}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: BuildingBuyOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1035261930
 Transform:
   m_ObjectHideFlags: 0
@@ -4347,7 +4378,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &1413557185 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3769376926240175010, guid: 46ce2e9ff5966b24886bb6f0cec8cd25, type: 3}
@@ -4505,7 +4536,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1424057346
 GameObject:
   m_ObjectHideFlags: 0
@@ -6117,7 +6148,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &2051271235
 GameObject:
   m_ObjectHideFlags: 0

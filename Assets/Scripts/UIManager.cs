@@ -17,6 +17,8 @@ public sealed class UIManager : MonoBehaviour
 
 	public TextMeshProUGUI valueText;
 
+	public Image BuyImage;
+
 	public UnityEvent RollDicePlay;
 
 	public void PlayerMovePoint()
@@ -25,5 +27,14 @@ public sealed class UIManager : MonoBehaviour
 		valueText.text = diceToMove.ToString();
 
 		RollDicePlay.Invoke();
+	}
+
+	public void BuildingBuyOn()
+	{
+		BuyImage.gameObject.SetActive(true);
+	}
+	public void BuildingBuyOff()
+	{
+		BuyImage.gameObject.SetActive(false);
 	}
 }

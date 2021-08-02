@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
-public class Buy : MonoBehaviour
+public sealed class Buy : MonoBehaviour
 {
 	public List<Toggle> toggleCheck;
 	public List<Text> textPrice;
 	public Text myMoney;
-	int aa;
+	int sum;
+
+	public UnityEvent RollDiceBuyOff;
 
 		// Start is called before the first frame update
-	  void Start()
+	void Start()
     {
         
     }
@@ -28,7 +31,7 @@ public class Buy : MonoBehaviour
 		{
 			if (toggleCheck[i].isOn)
 			{
-				aa += int.Parse(textPrice[i].text);
+				sum += int.Parse(textPrice[i].text);
 			}
 			else
 			{
@@ -36,10 +39,13 @@ public class Buy : MonoBehaviour
 			}
 		}
 
-		Debug.Log(aa);
-		var sub = int.Parse(myMoney.text);
-		var sum = sub - aa;
 
-		myMoney.text = sum.ToString();
+		Debug.Log(sum);
+		var sub = int.Parse(myMoney.text);
+		var myMoneySum = sub - sum;
+
+		myMoney.text = myMoneySum.ToString();
+
+		RollDiceBuyOff.Invoke();
 	}
 }

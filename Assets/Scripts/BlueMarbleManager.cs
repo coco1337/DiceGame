@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public sealed class BlueMarbleManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 	[SerializeField] private DiceManager dicemanager;
 	[SerializeField] private List<PlayerInfo> playerList;
 
+	public UnityEvent RollDiceBuyOn;
 
 	private int turn;
 	int result = 0;
@@ -35,7 +37,9 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
         if (playerList[turn].CurrentMoving) return;
 
-		var result = dicemanager.totalValue;
+			var result = dicemanager.totalValue;
         playerList[turn].MoveTo(result);
-    }
+			RollDiceBuyOn.Invoke();
+
+		}
 }
