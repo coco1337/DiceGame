@@ -7,13 +7,12 @@ public sealed class ToggleCheck : MonoBehaviour
 
 	public Toggle toggleCheck;
 
-
 	private void Start()
 	{
 		toggleCheck.isOn = true;
 	}
 
-	public void ToggleButtonCheck()
+	private void ToggleButtonCheck()
 	{
 		if (toggleCheck.isOn) toggleCheck.isOn = false;
 		else toggleCheck.isOn = true;
