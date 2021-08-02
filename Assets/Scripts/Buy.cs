@@ -6,14 +6,14 @@ using UnityEngine.Events;
 
 public sealed class Buy : MonoBehaviour
 {
-	public List<Toggle> toggleCheck;
-	public List<Text> textPrice;
+	[SerializeField] private List<Toggle> toggleCheck;
+	[SerializeField] private List<Text> textPrice;
 	public Text myMoney;
-	int sum;
+	private int sum;
 	public UnityEvent RollDiceBuyOff;
 	public void BuyLand()
 	{
-		for(int i=0; i<toggleCheck.Count; i++)
+		for (int i = 0; i < toggleCheck.Count; i++)
 		{
 			if (toggleCheck[i].isOn)
 			{

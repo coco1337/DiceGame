@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,15 +15,14 @@ public sealed class PlayerInfo : MonoBehaviour
 
 	public bool CurrentMoving { get; private set; }
 
-
 	public void MoveTo(int idx)
 	{
 		var dest = currentIndex + idx;
 		dest = dest >= BlueMarbleManager.Instance.GetBoardSize ? dest - BlueMarbleManager.Instance.GetBoardSize : dest;
-		StartCoroutine(CMoveAnimation(dest));
+		StartCoroutine(CMoveAnimation(dest,() => Debug.Log("으ㅏㅇ아아아")));
 	}
 
-	private IEnumerator CMoveAnimation(int destination)
+	private IEnumerator CMoveAnimation(int destination, Action temp)
 	{
 		this.CurrentMoving = true;
 		while (currentIndex != destination)
@@ -35,6 +35,7 @@ public sealed class PlayerInfo : MonoBehaviour
 			yield return new WaitForSeconds(0.5f);
 		}
 
+		temp.Invoke();
 		this.CurrentMoving = false;
 	}
 }

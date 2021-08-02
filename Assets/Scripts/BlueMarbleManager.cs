@@ -27,19 +27,18 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 		var p1 = Instantiate(playerPrefab, boardManager.CellList[0].transform);
 		p1.transform.localPosition = new Vector3(p1.transform.localPosition.x,
-			p1.transform.localPosition.y + PlayerHeightOffset, p1.transform.localPosition.z);
+			p1.transform.localPosition.y + this.PlayerHeightOffset, p1.transform.localPosition.z);
 		this.playerList.Add(p1);
 	}
 
+	public void RollDice()
+	{
 
-    public void RollDice()
-    {
+		if (playerList[turn].CurrentMoving) return;
 
-        if (playerList[turn].CurrentMoving) return;
+		var result = dicemanager.totalValue;
+		playerList[turn].MoveTo(result);
+		RollDiceBuyOn.Invoke();
 
-			var result = dicemanager.totalValue;
-        playerList[turn].MoveTo(result);
-			RollDiceBuyOn.Invoke();
-
-		}
+	}
 }
