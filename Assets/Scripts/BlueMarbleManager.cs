@@ -38,6 +38,4 @@ public sealed class BlueMarbleManager : MonoBehaviour
 		var result = dicemanager.totalValue;
         playerList[turn].MoveTo(result);
     }
-
-
 }

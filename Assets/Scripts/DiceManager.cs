@@ -33,8 +33,6 @@ public class DiceManager : MonoBehaviour
 				totalValue += diceList[i].value;
 			}
 		}
-
-		Debug.Log("두번째 유니티 이벤트" + totalValue);
 		EndRollEvent.Invoke();
 	}
 }

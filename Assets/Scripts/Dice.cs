@@ -13,6 +13,7 @@ public class Dice : MonoBehaviour
 
 	[HideInInspector]
 	public bool isRolling;
+
 	
 	public float minRollForce;
 	public float maxRollForce;
