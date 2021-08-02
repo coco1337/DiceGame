@@ -53,7 +53,6 @@ public class Dice : MonoBehaviour
 
     }
 
-
 	public void AddForceToDice()
 	{
 		if (!isRolling)
@@ -63,8 +62,4 @@ public class Dice : MonoBehaviour
 			rb.AddExplosionForce(Random.Range(minRollForce, maxRollForce), RandomPosition, -0.5f, 2f);
 		}
 	}
-}
-
-
-
-                                                                                                   
+}                                                                                             
