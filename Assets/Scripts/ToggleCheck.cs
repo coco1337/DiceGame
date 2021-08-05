@@ -9,7 +9,7 @@ public sealed class ToggleCheck : MonoBehaviour
 
 	private void Start()
 	{
-		toggleCheck.isOn = true;
+		toggleCheck.isOn = false;
 	}
 
 	private void ToggleButtonCheck()

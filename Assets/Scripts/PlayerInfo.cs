@@ -3,23 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public sealed class PlayerInfo : MonoBehaviour
 {
+	private UIManager uiManager;
+
 	private int currentIndex;
-	public DiceManager diceManager;
 
-	public Text valueText;
+	public UnityEvent BuyStart;
 
-	public int diceMove;
+	public int dest;
 
 	public bool CurrentMoving { get; private set; }
 
+	private void Awake()
+	{
+		uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+	}
+
 	public void MoveTo(int idx)
 	{
-		var dest = currentIndex + idx;
+		dest = currentIndex + idx;
 		dest = dest >= BlueMarbleManager.Instance.GetBoardSize ? dest - BlueMarbleManager.Instance.GetBoardSize : dest;
-		StartCoroutine(CMoveAnimation(dest,() => Debug.Log("으ㅏㅇ아아아")));
+		StartCoroutine(CMoveAnimation(dest, () => BuyStart.Invoke()));
+
+		Debug.Log(dest);
 	}
 
 	private IEnumerator CMoveAnimation(int destination, Action temp)
@@ -35,6 +45,7 @@ public sealed class PlayerInfo : MonoBehaviour
 			yield return new WaitForSeconds(0.5f);
 		}
 
+		this.BuyStart.AddListener(uiManager.BuildingBuyOn);
 		temp.Invoke();
 		this.CurrentMoving = false;
 	}

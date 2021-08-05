@@ -6,11 +6,23 @@ using UnityEngine.Events;
 
 public sealed class Buy : MonoBehaviour
 {
-	[SerializeField] private List<Toggle> toggleCheck;
+	[SerializeField] public List<Toggle> toggleCheck;
 	[SerializeField] private List<Text> textPrice;
+	[SerializeField] public List<Image> buildingBackground;
+	[SerializeField] private BlueMarbleManager blueMarbleManagers;
+
 	public Text myMoney;
-	private int sum;
 	public UnityEvent RollDiceBuyOff;
+
+	private int sum;
+	public GameObject player1;
+	private GameObject cell;
+
+	private void Awake()
+	{
+		player1 = GameObject.FindWithTag("Player");
+	}
+
 	public void BuyLand()
 	{
 		for (int i = 0; i < toggleCheck.Count; i++)
@@ -26,10 +38,38 @@ public sealed class Buy : MonoBehaviour
 		}
 
 		var sub = int.Parse(myMoney.text);
-		var myMoneySum = sub - sum;
-
-		myMoney.text = myMoneySum.ToString();
+		myMoney.text = (sub - sum).ToString();
 
 		RollDiceBuyOff.Invoke();
+		Building();
+	}
+
+	public void Building()
+	{
+		cell = player1.transform.parent.gameObject;
+		for (int i = 0; i < toggleCheck.Count; i++)
+		{
+			if (toggleCheck[i].isOn)
+			{
+				if (i == 0)
+				{
+					var playerColor = blueMarbleManagers.playerList[0].GetComponent<MeshRenderer>().material.GetColor("_Color");
+					cell.GetComponent<MeshRenderer>().material.SetColor("_Color", playerColor);
+				}
+				else if (i == 1)
+				{
+					cell.transform.GetChild(1).gameObject.SetActive(true);
+				}
+				else if (i == 2)
+				{
+					cell.transform.GetChild(2).gameObject.SetActive(true);
+				}
+				else if (i == 3)
+				{
+					cell.transform.GetChild(3).gameObject.SetActive(true);
+				}
+				else { }
+			}
+		}
 	}
 }

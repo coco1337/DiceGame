@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
-	[SerializeField] private List<PlayerInfo> playerList;
-
-	private int turn;
-	private float playerHeightOffset = 1f;
-
 	[HideInInspector]
 	public bool isRolling;
 

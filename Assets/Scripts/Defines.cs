@@ -4,4 +4,5 @@ public enum ECardEffect
 	PAY_TO_HOSPITAL,
 	WINNING_A_LOTTERY,
 	MAX = WINNING_A_LOTTERY + 1
+
 }

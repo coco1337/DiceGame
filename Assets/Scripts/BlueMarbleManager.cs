@@ -9,12 +9,13 @@ public sealed class BlueMarbleManager : MonoBehaviour
 	[SerializeField] private UIManager uiManager;
 	[SerializeField] private PlayerInfo playerPrefab;
 	[SerializeField] private DiceManager dicemanager;
-	[SerializeField] private List<PlayerInfo> playerList;
+	[SerializeField] public List<PlayerInfo> playerList;
 
-	public UnityEvent RollDiceBuyOn;
+	private Material[] material;
 
 	private int turn;
-	int result = 0;
+
+	public int dest;
 
 	public static BlueMarbleManager Instance { get; private set; }
 	public int GetBoardSize => boardManager.CellList.Count;
@@ -26,6 +27,11 @@ public sealed class BlueMarbleManager : MonoBehaviour
 		Instance ??= this;
 
 		var p1 = Instantiate(playerPrefab, boardManager.CellList[0].transform);
+
+		//material = p1.GetComponent<MeshRenderer>().materials;
+		//p1.GetComponent<MeshRenderer>().materials = material;
+		p1.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+		
 		p1.transform.localPosition = new Vector3(p1.transform.localPosition.x,
 			p1.transform.localPosition.y + this.PlayerHeightOffset, p1.transform.localPosition.z);
 		this.playerList.Add(p1);
@@ -33,12 +39,9 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	public void RollDice()
 	{
-
 		if (playerList[turn].CurrentMoving) return;
-
 		var result = dicemanager.totalValue;
 		playerList[turn].MoveTo(result);
-		RollDiceBuyOn.Invoke();
-
+		dest = playerList[turn].dest;
 	}
 }
