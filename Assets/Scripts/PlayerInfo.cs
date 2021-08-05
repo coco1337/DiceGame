@@ -7,11 +7,9 @@ using UnityEngine.Events;
 
 public sealed class PlayerInfo : MonoBehaviour
 {
-	private UIManager uiManager;
-
 	private int currentIndex;
 
-	public UnityEvent BuyStart;
+	public UnityEvent buyStart;
 
 	public int dest;
 
@@ -19,34 +17,33 @@ public sealed class PlayerInfo : MonoBehaviour
 
 	private void Awake()
 	{
-		uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-
+		BlueMarbleManager.Instance.rollDiceEvent.AddListener(MoveTo);
 	}
 
 	public void MoveTo(int idx)
 	{
-		dest = currentIndex + idx;
-		dest = dest >= BlueMarbleManager.Instance.GetBoardSize ? dest - BlueMarbleManager.Instance.GetBoardSize : dest;
-		StartCoroutine(CMoveAnimation(dest, () => BuyStart.Invoke()));
+		this.dest = this.currentIndex + idx;
+		this.dest = this.dest >= BlueMarbleManager.Instance.GetBoardSize ? this.dest - BlueMarbleManager.Instance.GetBoardSize : this.dest;
+		StartCoroutine(CMoveAnimation(this.dest, () => this.buyStart.Invoke()));
 
-		Debug.Log(dest);
+		Debug.Log(this.dest);
 	}
 
 	private IEnumerator CMoveAnimation(int destination, Action temp)
 	{
 		this.CurrentMoving = true;
-		while (currentIndex != destination)
+		while (this.currentIndex != destination)
 		{
-			currentIndex = currentIndex >= BlueMarbleManager.Instance.GetBoardSize - 1 ? 0 : currentIndex + 1;
-			var next = BlueMarbleManager.Instance.GetCell(currentIndex);
+			this.currentIndex = this.currentIndex >= BlueMarbleManager.Instance.GetBoardSize - 1 ? 0 : this.currentIndex + 1;
+			var next = BlueMarbleManager.Instance.GetCell(this.currentIndex);
 			var y = this.transform.localPosition.y;
 			this.transform.parent = next.transform;
 			this.transform.localPosition = new Vector3(0, y, 0);
 			yield return new WaitForSeconds(0.5f);
 		}
-
-		this.BuyStart.AddListener(uiManager.BuildingBuyOn);
+		
 		temp.Invoke();
+		BlueMarbleManager.Instance.CurrentStep = ESteps.BUYING;
 		this.CurrentMoving = false;
 	}
 }

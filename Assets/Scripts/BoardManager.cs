@@ -6,5 +6,5 @@ public sealed class BoardManager : MonoBehaviour
 {
   [SerializeField] private List<BoardCell> cellList;
 
-  public List<BoardCell> CellList => cellList;
+  public List<BoardCell> CellList => this.cellList;
 } 

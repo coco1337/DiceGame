@@ -7,42 +7,35 @@ using UnityEngine.Events;
 public class DiceManager : MonoBehaviour
 {
 	[SerializeField] private Image image;
-	public List<Dice> diceList;  // ´ÙÀÌ½º 2°³ ´ëºñ
+	public List<Dice> diceList;  // ï¿½ï¿½ï¿½Ì½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int totalValue;
-	public UnityEvent EndRollEvent;
+	public UnityEvent endRollEvent;
 
 	public void RollAllDie()
 	{
-		if (!image.gameObject.activeSelf)
-		{
-			totalValue = 0;
+		this.totalValue = 0;
 
-			for (int i = 0; i < diceList.Count; i++)
-			{
-				diceList[i].AddForceToDice();
-			}
-		}
-		else
+		foreach (var t in this.diceList)
 		{
-			Debug.Log("Ã¢ ¾È´Ý");
+			t.AddForceToDice();
 		}
 	}
 
 	public void CountAllDieValues()
 	{
-		for (int i = 0; i < diceList.Count; i++)
+		for (int i = 0; i < this.diceList.Count; i++)
 		{
-			if (diceList[i].isRolling == true)
+			if (this.diceList[i].isRolling == true)
 			{
-				totalValue = 0;
+				this.totalValue = 0;
 				return;
 			}
 			else
 			{
-				totalValue += diceList[i].value;
+				this.totalValue += this.diceList[i].value;
 			}
 		}
 
-		EndRollEvent.Invoke();
+		this.endRollEvent.Invoke();
 	}
 }

@@ -9,27 +9,27 @@ public class Dice : MonoBehaviour
 	[HideInInspector]
 	public bool isRolling;
 
-	
 	public float minRollForce;
 	public float maxRollForce;
 	private Rigidbody rb;
 	public int value;
-	public UnityEvent RollEvent;
+	public UnityEvent rollEvent;
 
 	private void Awake()
 	{
-		rb = this.GetComponent<Rigidbody>();
+		this.rb = GetComponent<Rigidbody>();
 	}
 
 	private void Update()
 	{
-		if (isRolling == true)
+		if (this.isRolling == true)
 		{
-			if (rb.IsSleeping())
+			if (this.rb.IsSleeping())
 			{
-				isRolling = false;
+				this.isRolling = false;
+				BlueMarbleManager.Instance.CurrentStep = ESteps.MOVING;
 				CalculateValue();
-				RollEvent.Invoke();
+				this.rollEvent?.Invoke();
 			}
 		}
 	}
@@ -40,22 +40,19 @@ public class Dice : MonoBehaviour
 		var rightPosDot = Vector3.Dot(Vector3.up, this.transform.right);
 		var forwardPosDot = Vector3.Dot(Vector3.up, this.transform.forward);
 
-        if (System.Math.Abs(upPosDot - 1) < 0.1f) value = 2;
-        if (System.Math.Abs(upPosDot - -1) < 0.1f) value = 4;
-        if (System.Math.Abs(rightPosDot - 1) < 0.1f) value = 3;
-        if (System.Math.Abs(rightPosDot - -1) < 0.1f) value = 1;
-        if (System.Math.Abs(forwardPosDot - 1) < 0.1f) value = 5;
-        if (System.Math.Abs(forwardPosDot - -1) < 0.1f) value = 6;
-
-    }
+    if (System.Math.Abs(upPosDot - 1) < 0.1f) this.value = 2;
+    if (System.Math.Abs(upPosDot - -1) < 0.1f) this.value = 4;
+    if (System.Math.Abs(rightPosDot - 1) < 0.1f) this.value = 3;
+    if (System.Math.Abs(rightPosDot - -1) < 0.1f) this.value = 1;
+    if (System.Math.Abs(forwardPosDot - 1) < 0.1f) this.value = 5;
+    if (System.Math.Abs(forwardPosDot - -1) < 0.1f) this.value = 6;
+	}
 
 	public void AddForceToDice()
 	{
-		if (!isRolling)
-		{
-			isRolling = true;
-			var RandomPosition = new Vector3(Random.Range(-0.2f, 0.2f), -1, Random.Range(-0.2f, 0.2f));
-			rb.AddExplosionForce(Random.Range(minRollForce, maxRollForce), RandomPosition, -0.5f, 2f);
-		}
+		if (this.isRolling) return;
+		this.isRolling = true;
+		var randomPosition = new Vector3(Random.Range(-0.2f, 0.2f), -1, Random.Range(-0.2f, 0.2f));
+		this.rb.AddExplosionForce(Random.Range(this.minRollForce, this.maxRollForce), randomPosition, -0.5f, 2f);
 	}
 }                                                                                             

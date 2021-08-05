@@ -41,12 +41,12 @@ public sealed class CardManager : MonoBehaviour
 
 		// no need to access id
 		int selected = Random.Range(0, this.cardPool.Count);
-		var card = cardPool[selected];
+		var card = this.cardPool[selected];
 
-		pickRandomCard.Invoke(playerIndex, card.effect);
+		this.pickRandomCard.Invoke(playerIndex, card.effect);
 
-		usedCards.Add(card);
-		cardPool.RemoveAt(selected);
+		this.usedCards.Add(card);
+		this.cardPool.RemoveAt(selected);
 	}
 }
 

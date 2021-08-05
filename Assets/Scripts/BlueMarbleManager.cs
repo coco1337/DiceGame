@@ -10,6 +10,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 	[SerializeField] private PlayerInfo playerPrefab;
 	[SerializeField] private DiceManager dicemanager;
 	[SerializeField] public List<PlayerInfo> playerList;
+	private BlueMarbleManager instance;
 
 	private Material[] material;
 
@@ -17,16 +18,23 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	public int dest;
 
+	public UnityEvent<int> rollDiceEvent;
+
 	public static BlueMarbleManager Instance { get; private set; }
-	public int GetBoardSize => boardManager.CellList.Count;
-	public BoardCell GetCell(int index) => boardManager.CellList[index];
+	public int GetBoardSize => this.boardManager.CellList.Count;
+	public BoardCell GetCell(int index) => this.boardManager.CellList[index];
 	public float PlayerHeightOffset { get; } = 1f;
+
+	private void Awake() => this.instance ??= this;
+	
+	public ESteps CurrentStep { get; set; }
 
 	private void Start()
 	{
 		Instance ??= this;
+		this.CurrentStep = ESteps.NONE;
 
-		var p1 = Instantiate(playerPrefab, boardManager.CellList[0].transform);
+		var p1 = Instantiate(this.playerPrefab, this.boardManager.CellList[0].transform);
 
 		//material = p1.GetComponent<MeshRenderer>().materials;
 		//p1.GetComponent<MeshRenderer>().materials = material;
@@ -39,9 +47,12 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	public void RollDice()
 	{
-		if (playerList[turn].CurrentMoving) return;
-		var result = dicemanager.totalValue;
-		playerList[turn].MoveTo(result);
-		dest = playerList[turn].dest;
+		//if (playerList[turn].CurrentMoving) return;
+		//var result = dicemanager.totalValue;
+		//playerList[turn].MoveTo(result);
+		//dest = playerList[turn].dest;
+
+		this.rollDiceEvent?.Invoke(this.dicemanager.totalValue);
+		this.CurrentStep = ESteps.THROWING;
 	}
 }

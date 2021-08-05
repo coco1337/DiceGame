@@ -21,13 +21,20 @@ public class UIManager : MonoBehaviour
 
 	public TextMeshProUGUI valueText;
 
-	public Image BuyImage;
+	public Image buyImage;
 
-	public UnityEvent RollDicePlay;
+	public UnityEvent rollDicePlay;
 
-	private GameObject cell;
+	private BoardCell cell;
 
 	private int moneys;
+
+	private int dest;
+
+	private void Awake()
+	{
+		this.bmm.rollDiceEvent.AddListener(BuildingBuyOn);
+	}
 
 	private void Update()
 	{
@@ -39,71 +46,69 @@ public class UIManager : MonoBehaviour
 
 	public void PlayerMovePoint()
 	{
-		int diceToMove = diceManager.totalValue;
-		valueText.text = diceToMove.ToString();
+		int diceToMove = this.diceManager.totalValue;
+		this.valueText.text = diceToMove.ToString();
 
-		RollDicePlay.Invoke();
+		this.rollDicePlay.Invoke();
 	}
 
-	public void BuildingBuyOn()
+	/// <summary>
+	/// ÎïÖ Î∞è Í±¥Î¨º Íµ¨Îß§ UI ÏºúÍ∏∞
+	/// </summary>
+	/// <param name="dest">int, destination</param>
+	public void BuildingBuyOn(int dest)
 	{
-		Debug.Log(bmm.dest);
-		if (bmm.dest == 10)
+		this.dest = dest;
+		if (this.dest == 10)
 		{
-			Debug.Log("±‚∫Œ±› √ﬂ∞°");
-			moneys = int.Parse(myMoney.text);
-			var div = moneys / 10;
-			Debug.Log("¿Ã¿⁄∞™ : " + div);
-			var sum = moneys + div;
-			Debug.Log("¿Ã¿⁄+¿⁄∫ª : " + sum);
-			myMoney.text = sum.ToString();
+			this.moneys -= this.moneys / 10;
+			this.myMoney.text = this.moneys.ToString();
 		}
 		else
 		{
-			BuyImage.gameObject.SetActive(true);
-			BackgroundOn();
+			BuildingBuyPopup();
+			//BackgroundOn();
 		}
 	}
+	
 	public void BuildingBuyOff()
 	{
+		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE;
 		BackgroundOff();
-		BuyImage.gameObject.SetActive(false);
+		this.buyImage.gameObject.SetActive(false);
+	}
+
+	private void BuildingBuyPopup()
+	{
+		this.cell = this.bmm.GetCell(this.dest);
+		var buildStatus = this.cell.GetBuildStatus;
+		this.buyImage.gameObject.SetActive(true);
+		for (int i = 0; i < buildStatus.Length; ++i)
+		{
+			this.buy.toggleCheck[i].interactable = buildStatus[i] == false;
+		}
+		this.buyImage.gameObject.SetActive(true);
 	}
 
 	public void BackgroundOn()
 	{
-		cell = buy.player1.transform.parent.gameObject;
+		this.cell = this.bmm.GetCell(this.dest);
 
-		for(int i=0; i< buy.buildingBackground.Count; i++)
+		for(int i=0; i < this.buy.buildingBackground.Count; i++)
 		{
 			if(i==1)
 			{
-				if (cell.transform.GetChild(1).gameObject.activeSelf)
-				{
-					buy.toggleCheck[i].isOn = false;
-					buy.buildingBackground[i].gameObject.SetActive(true);
-					
-				}
+				this.buy.toggleCheck[i].interactable = false;
 			}
 
 			else if(i==2)
 			{
-				if (cell.transform.GetChild(2).gameObject.activeSelf)
-				{
-					buy.toggleCheck[i].isOn = false;
-					buy.buildingBackground[i].gameObject.SetActive(true);
-					
-				}
+				this.buy.toggleCheck[i].isOn = false;
 			}
 
 			else if(i==3)
 			{
-				if (cell.transform.GetChild(3).gameObject.activeSelf)
-				{
-					buy.toggleCheck[i].isOn = false;
-					buy.buildingBackground[i].gameObject.SetActive(true);
-					
-				}
+				this.buy.toggleCheck[i].isOn = false;
 			}
 			else { }
 		}
@@ -112,9 +117,9 @@ public class UIManager : MonoBehaviour
 
 	public void BackgroundOff()
 	{
-		for(int i=0; i<buy.buildingBackground.Count; i++)
+		foreach (var t in this.buy.buildingBackground)
 		{
-			buy.buildingBackground[i].gameObject.SetActive(false);
+			t.gameObject.SetActive(false);
 		}
 	}
 }
