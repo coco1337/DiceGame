@@ -15,21 +15,20 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private PlayerInfo playerinfo;
 	[SerializeField] private Text myMoney;
 
-	public static UIManager Uimanager { get; private set; }
+	[SerializeField] public List<Toggle> toggleCheck;
+	[SerializeField] private List<Text> textPrice;
 
 	public DiceManager diceManager;
-
 	public TextMeshProUGUI valueText;
-
 	public Image buyImage;
-
 	public UnityEvent rollDicePlay;
-
 	private BoardCell cell;
+	public bool[] buildBool = new bool[4];
 
-	private int moneys;
-
+	private int money;
 	private int dest;
+	private int sum;
+	private int diceSum;
 
 	private void Awake()
 	{
@@ -38,7 +37,7 @@ public class UIManager : MonoBehaviour
 
 	private void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			BuildingBuyOff();
 		}
@@ -48,78 +47,68 @@ public class UIManager : MonoBehaviour
 	{
 		int diceToMove = this.diceManager.totalValue;
 		this.valueText.text = diceToMove.ToString();
-
-		this.rollDicePlay.Invoke();
 	}
 
 	/// <summary>
 	/// 땅 및 건물 구매 UI 켜기
 	/// </summary>
 	/// <param name="dest">int, destination</param>
-	public void BuildingBuyOn(int dest)
+	public void BuildingBuyOn(int dest)         /// 현재 유니티 이벤트 주사위값으로 나오는 문제있음. 수정해야함  아마 같은 이벤트에 넣어서 그런듯하다.
 	{
+		this.diceSum += dest;
 		this.dest = dest;
-		if (this.dest == 10)
+		if (diceSum > 40) { Debug.Log("40넘김"); diceSum -= 40; }
+
+		if (this.diceSum == 10)
 		{
-			this.moneys -= this.moneys / 10;
-			this.myMoney.text = this.moneys.ToString();
+			var moneys = int.Parse(myMoney.text) / 10;
+			money = int.Parse(myMoney.text) - moneys;
+			this.myMoney.text = this.money.ToString();
 		}
 		else
 		{
 			BuildingBuyPopup();
-			//BackgroundOn();
 		}
 	}
-	
+
 	public void BuildingBuyOff()
 	{
-		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE;
-		BackgroundOff();
+		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE; //현재상태
+		Debug.Log(BlueMarbleManager.Instance.CurrentStep);
 		this.buyImage.gameObject.SetActive(false);
 	}
 
 	private void BuildingBuyPopup()
 	{
-		this.cell = this.bmm.GetCell(this.dest);
-		var buildStatus = this.cell.GetBuildStatus;
+		this.cell = this.bmm.GetCell(this.diceSum);  // 부루마블에 있는 getCell에 dest(주사위값들)을 넣어줘서 플레이어 위치가 보드 어느위치인지 나오게함 (dest에서 diceSum으로 변경)
+		var buildStatus = this.cell.GetBuildStatus; // BoardCell에 있는 GetBuildStatus 의 bool타입 가져옴
+		Debug.Log(buildStatus);
 		this.buyImage.gameObject.SetActive(true);
 		for (int i = 0; i < buildStatus.Length; ++i)
 		{
-			this.buy.toggleCheck[i].interactable = buildStatus[i] == false;
+			this.toggleCheck[i].interactable = buildStatus[i] == false;
 		}
-		this.buyImage.gameObject.SetActive(true);
 	}
-
-	public void BackgroundOn()
+	public void BuyButton() // 토글 체크후 내 자산에서 건물값 지불
 	{
-		this.cell = this.bmm.GetCell(this.dest);
-
-		for(int i=0; i < this.buy.buildingBackground.Count; i++)
+		for (int i = 0; i < this.toggleCheck.Count; i++)
 		{
-			if(i==1)
+			
+			if (this.toggleCheck[i].isOn)
 			{
-				this.buy.toggleCheck[i].interactable = false;
+				this.sum += int.Parse(this.textPrice[i].text);
+				buildBool[i] = this.cell.GetBuildStatus[i] = true;
 			}
-
-			else if(i==2)
+			else
 			{
-				this.buy.toggleCheck[i].isOn = false;
-			}
-
-			else if(i==3)
-			{
-				this.buy.toggleCheck[i].isOn = false;
-			}
-			else { }
+				buildBool[i] = this.cell.GetBuildStatus[i] = false;
+			}	
 		}
-		//..
-	}
-
-	public void BackgroundOff()
-	{
-		foreach (var t in this.buy.buildingBackground)
-		{
-			t.gameObject.SetActive(false);
-		}
+		
+		cell.BuildingOn(buildBool);
+		int sub = int.Parse(this.myMoney.text);
+		this.myMoney.text = (sub - this.sum).ToString();
+		sum = 0;
+		BuildingBuyOff();
 	}
 }

@@ -6,12 +6,14 @@ using Random = UnityEngine.Random;
 
 public sealed class BoardCell : MonoBehaviour
 {
+	[SerializeField] private BlueMarbleManager bmm;
 	[SerializeField] private ECellType cellType;
 	[SerializeField] private int owner;
 	[SerializeField] private GameObject villa;
 	[SerializeField] private GameObject hotel;
 	[SerializeField] private GameObject building;
 	[SerializeField] private Transform estateTransform;
+	[SerializeField] private GameObject estate;
 	
 	/// <summary>
 	/// [0] : 소유 여부
@@ -38,4 +40,15 @@ public sealed class BoardCell : MonoBehaviour
     this.transform.position = new Vector3(this.transform.position.x, 
 			(Mathf.Sin(Time.time * this.moveSpeed) + 1) / 8, this.transform.position.z);
   }
+
+	public void BuildingOn(bool[] bo)
+	{
+		for(int i=0; i<bo.Length; i++)
+		{
+			if (i == 1 && bo[1]) { this.building.SetActive(true); }
+			else if (i == 2 && bo[2]) { this.villa.SetActive(true); }
+			else if (i == 3 && bo[3]) { this.hotel.SetActive(true); }
+			else { Debug.Log("BuildingOn 오류"); }
+		}
+	}
 }

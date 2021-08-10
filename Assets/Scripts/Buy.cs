@@ -15,13 +15,6 @@ public sealed class Buy : MonoBehaviour
 	public UnityEvent rollDiceBuyOff;
 
 	private int sum;
-	public GameObject player1;
-	private GameObject cell;
-
-	private void Awake()
-	{
-		this.player1 = GameObject.FindWithTag("Player");
-	}
 
 	public void BuyLand()
 	{

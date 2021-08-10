@@ -13,11 +13,14 @@ public sealed class PlayerInfo : MonoBehaviour
 
 	public int dest;
 
+	public static PlayerInfo Instance { get; private set; }
+
 	public bool CurrentMoving { get; private set; }
 
 	private void Awake()
 	{
-		BlueMarbleManager.Instance.rollDiceEvent.AddListener(MoveTo);
+		Instance ??= this;
+		BlueMarbleManager.Instance.rollDiceEvent.AddListener(MoveTo); // 부루마블매니저에 있는 UnityEvent 안에 MoveTo 넣어줌
 	}
 
 	public void MoveTo(int idx)
