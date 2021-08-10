@@ -6837,6 +6837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1542814548}
   - component: {fileID: 1542814547}
+  - component: {fileID: 1542814549}
   m_Layer: 0
   m_Name: DiceManager
   m_TagString: Untagged
@@ -6889,6 +6890,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1542814549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542814546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10db0f688f4f64cdf9b119d8ac54e55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1551555399
 PrefabInstance:
   m_ObjectHideFlags: 0
