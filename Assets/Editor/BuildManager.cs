@@ -16,6 +16,8 @@ public class BuildManager : MonoBehaviour
       locationPathName = "Builds/WebGL/"
     };
 
+    PlayerSettings.WebGL.emscriptenArgs = "-s EXTRA_EXPORTED_RUNTIME_METHODS['cwrap']";
+
     var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
     
     #if UNITY_EDITOR
