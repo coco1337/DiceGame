@@ -15,8 +15,8 @@ public class BuildManager : MonoBehaviour
       options = BuildOptions.None,
       locationPathName = "Builds/WebGL/"
     };
-
-    PlayerSettings.WebGL.emscriptenArgs = "-s EXTRA_EXPORTED_RUNTIME_METHODS['cwrap']";
+    
+    PlayerSettings.WebGL.emscriptenArgs = "-s EXTRA_EXPORTED_RUNTIME_METHODS['cwrap', 'ccall']";
 
     var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
     
