@@ -15,8 +15,8 @@ public class BuildManager : MonoBehaviour
       options = BuildOptions.None,
       locationPathName = "Builds/WebGL/"
     };
-    
-    PlayerSettings.WebGL.emscriptenArgs = "-s EXTRA_EXPORTED_RUNTIME_METHODS[\"cwrap\", \"ccall\"]";
+
+    PlayerSettings.WebGL.emscriptenArgs = "";
 
     var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
     
@@ -29,9 +29,12 @@ public class BuildManager : MonoBehaviour
         Debug.Log("Build Succeeded: " + buildSum.totalSize + " bytes");
         break;
       case { result: BuildResult.Failed }:
-        Debug.Log("Build failed");
+        Debug.LogError("Build failed");
         break;
     }
     #endif
   }
 }
+
+    
+// PlayerSettings.WebGL.emscriptenArgs = "-s EXTRA_EXPORTED_RUNTIME_METHODS[\"cwrap\", \"ccall\"]";
