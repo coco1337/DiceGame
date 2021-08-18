@@ -23,4 +23,14 @@ public sealed class WebSocketManager : MonoBehaviour
 		Hello();
 		SetEvent((s => this.uiText.text = s));
 	}
+	
+	/*
+	 *
+Module['WebGLTest'].OnTest2 = function() {
+    // Module.cwarp("name", null, [...args]);
+}
+// Module.cwrap("name", return, [...args]
+	 * 
+	 */
+	
 }
