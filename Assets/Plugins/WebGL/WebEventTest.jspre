@@ -3,6 +3,6 @@ Module['WebGLTest'].OnTest = function() {
 }
 
 Module['WebGLTest'].OnTest2 = function() {
-    Module.cwarp("name", null, [...args]);
+    // Module.cwarp("name", null, [...args]);
 }
 // Module.cwrap("name", return, [...args]
