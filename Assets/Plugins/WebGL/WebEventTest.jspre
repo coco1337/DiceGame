@@ -1,4 +1,4 @@
 Module['WebGLTest'].OnTest = function() {
-    this.OnTest = console.log('emscripten');
-    // Module.cwrap("name", return, [...args]
+    this.OnTest = Module.cwrap('OnTest', null, ['string']);
 }
+// Module.cwrap("name", return, [...args]
