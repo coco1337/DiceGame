@@ -3,6 +3,6 @@ mergeInto(LibraryManager.library, {
     window.alert('Hello world!');
   },
   SendPacket: function(str) {
-    ReactUnityWebGL.SendPacket(str);
+    ReactUnityWebGL.SendPacket(Pointer_stringify(str));
   }
 });
