@@ -35,6 +35,3 @@ public class BuildManager : MonoBehaviour
     #endif
   }
 }
-
-    
-// PlayerSettings.WebGL.emscriptenArgs = "-s EXTRA_EXPORTED_RUNTIME_METHODS[\"cwrap\", \"ccall\"]";
