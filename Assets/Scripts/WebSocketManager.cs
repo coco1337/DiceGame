@@ -24,6 +24,7 @@ public sealed class WebSocketManager : MonoBehaviour
 	public void Test(string str)
 	{
 		this.uiText.text = str;
+		Debug.Log(nameof(Test) + " 이거 호출되긴함? " + str);
 	}
 	
 	/*
