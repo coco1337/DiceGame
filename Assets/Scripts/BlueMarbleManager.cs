@@ -50,7 +50,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 		//var result = dicemanager.totalValue;
 		//playerList[turn].MoveTo(dicemanager.totalValue); //멀티
 		//dest = playerList[turn].dest;
-			this.rollDiceEvent?.Invoke(this.dicemanager.totalValue);
+			this.rollDiceEvent?.Invoke(this.dicemanager.totalValue); // UI창이 바로켜지는곳
 			this.CurrentStep = ESteps.THROWING;
 
 		//if(turn == 0) { turn = 1; }
