@@ -11,6 +11,8 @@ public class DiceManager : MonoBehaviour
 	public int totalValue;
 	public UnityEvent endRollEvent;
 
+	private void Start() => AddHandlers();
+
 	public void RollAllDice()
 	{
 		this.totalValue = 0;
@@ -19,6 +21,9 @@ public class DiceManager : MonoBehaviour
 		{
 			t.AddForceToDice();
 		}
+
+		var packet = new RollDiceReq();
+		WebSocketManager.SendPacket(EPacketId.ROLL_DICE_REQUEST, packet);
 	}
 
 	public void CountAllDiceValues()
@@ -37,5 +42,15 @@ public class DiceManager : MonoBehaviour
 		}
 
 		this.endRollEvent.Invoke();
+	}
+
+	public void OnReceivePacket<RollDiceRes>(RollDiceRes packet)
+	{
+		// 패킷으로 하는일 처리
+	}
+
+	private void AddHandlers()
+	{
+		WebSocketManager.AddHandler(EPacketId.ROLL_DICE_RESPONSE, new MessageHandler<RollDiceRes>(OnReceivePacket));
 	}
 }

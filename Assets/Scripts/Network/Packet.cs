@@ -3,6 +3,18 @@ using System;
 [Serializable]
 public class WebPacket
 {
+	public EPacketId id;
+}
+
+[Serializable]
+public sealed class RollDiceReq : WebPacket
+{
+	
+}
+
+[Serializable]
+public sealed class RollDiceRes : WebPacket
+{
 	
 }
 
