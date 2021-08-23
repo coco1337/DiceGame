@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using LitJson;
+using Newtonsoft.Json;
 using UnityEngine.UI;
 
 public class PriceManagers
@@ -57,6 +58,24 @@ public class JsonManagers : MonoBehaviour
 		}
 	}
 
+	public void Load2(int x)
+	{
+		string json = File.ReadAllText(Application.dataPath + "/Resources/BuildingJson.json");
+		var buildingData = JsonConvert.DeserializeObject<Build[]>(json);
+
+		for (int i = 0; i < buildingData.Length; ++i)
+		{
+			if (i == 4 || i == 14 || i == 24)
+			{
+				SpecialPrice2(i, buildingData[i]);
+			}
+			else
+			{
+				Price2(i, buildingData[i]);
+			}
+		}
+	}
+
 	void Price(int a, JsonData Data)
 	{
 		earthPrice.text = Data[a]["Land"].ToString();
@@ -69,6 +88,14 @@ public class JsonManagers : MonoBehaviour
 		Debug.Log(Data[a]["Building"].ToString());
 	}
 
+	private void Price2(int idx, Build data)
+	{
+		this.earthPrice.text = data.Land.ToString();
+		this.building.text = data.Building.ToString();
+		this.villa.text = data.Villa.ToString();
+		this.hotel.text = data.Hotel.ToString();
+	}
+
 	void SpecialPrice(int a, JsonData Data)
 	{
 		specialName.text = Data[a]["Country"].ToString();
@@ -76,5 +103,11 @@ public class JsonManagers : MonoBehaviour
 
 		Debug.Log(Data[a]["Country"].ToString());
 		Debug.Log(Data[a]["Land"].ToString());
+	}
+
+	private void SpecialPrice2(int idx, Build data)
+	{
+		this.specialName.text = data.Country.ToString();
+		this.specialPrice.text = data.Land.ToString();
 	}
 }
