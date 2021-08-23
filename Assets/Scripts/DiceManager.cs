@@ -11,7 +11,7 @@ public class DiceManager : MonoBehaviour
 	public int totalValue;
 	public UnityEvent endRollEvent;
 
-	public void RollAllDie()
+	public void RollAllDice()
 	{
 		this.totalValue = 0;
 
@@ -21,7 +21,7 @@ public class DiceManager : MonoBehaviour
 		}
 	}
 
-	public void CountAllDieValues()
+	public void CountAllDiceValues()
 	{
 		for (int i = 0; i < this.diceList.Count; i++)
 		{

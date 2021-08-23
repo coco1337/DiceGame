@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
 	{
 		if (this.isRolling) return;
 		this.isRolling = true;
-		var randomPosition = new Vector3(Random.Range(-0.2f, 0.2f), -1, Random.Range(-0.2f, 0.2f));
+		var randomPosition = new Vector3(Random.Range(-0.2f, 0.8f), -1, Random.Range(-0.2f, 0.8f));
 		this.rb.AddExplosionForce(Random.Range(this.minRollForce, this.maxRollForce), randomPosition, -0.5f, 2f);
 	}
 }                                                                                             

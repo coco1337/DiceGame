@@ -45,10 +45,11 @@ public sealed class BoardCell : MonoBehaviour
 	{
 		for(int i=0; i<bo.Length; i++)
 		{
-			if (i == 1 && bo[1]) { this.building.SetActive(true); }
+			if( i==0&& bo[0]) { Debug.Log("색넣는곳"); }
+			else if (i == 1 && bo[1]) { this.building.SetActive(true); }
 			else if (i == 2 && bo[2]) { this.villa.SetActive(true); }
 			else if (i == 3 && bo[3]) { this.hotel.SetActive(true); }
-			else { Debug.Log("BuildingOn 오류"); }
+			else { Debug.Log("BuildingOn false"); }
 		}
 	}
 }
