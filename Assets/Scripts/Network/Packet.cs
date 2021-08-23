@@ -19,6 +19,12 @@ public sealed class RollDiceRes : WebPacket
 }
 
 [Serializable]
+public sealed class ChangeTurnNoti : WebPacket
+{
+	public int turn;
+}
+
+[Serializable]
 public sealed class Build : WebPacket
 {
 	public string Country;

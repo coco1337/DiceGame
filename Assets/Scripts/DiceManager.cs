@@ -44,13 +44,19 @@ public class DiceManager : MonoBehaviour
 		this.endRollEvent.Invoke();
 	}
 
-	public void OnReceivePacket<RollDiceRes>(RollDiceRes packet)
+	public void OnReceivePacket(RollDiceRes packet)
 	{
 		// 패킷으로 하는일 처리
+	}
+
+	public void OnReceivePacket(ChangeTurnNoti packet)
+	{
+		
 	}
 
 	private void AddHandlers()
 	{
 		WebSocketManager.AddHandler(EPacketId.ROLL_DICE_RESPONSE, new MessageHandler<RollDiceRes>(OnReceivePacket));
+		WebSocketManager.AddHandler(EPacketId.CHANGE_TURN_NOTI, new MessageHandler<ChangeTurnNoti>(OnReceivePacket));
 	}
 }
