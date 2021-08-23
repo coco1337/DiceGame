@@ -1,1 +1,0 @@
-Module.cwrap("OnTest", "Hello, world!");
