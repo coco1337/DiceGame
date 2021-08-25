@@ -1,10 +1,9 @@
 using System;
-using System.Text;
 using Newtonsoft.Json;
 
 public interface IMessageHandler
 {
-	Action MakeAction(byte[] message);
+	Action MakeAction(string message);
 }
 
 public class MessageHandler<T> : IMessageHandler where T : WebPacket
@@ -16,10 +15,9 @@ public class MessageHandler<T> : IMessageHandler where T : WebPacket
 		this.handler = handler;
 	}
 
-	public Action MakeAction(byte[] message)
+	public Action MakeAction(string message)
 	{
-		var jsonString = Encoding.Default.GetString(message);
-		var msg = JsonConvert.DeserializeObject<T>(jsonString);
+		var msg = JsonConvert.DeserializeObject<T>(message);
 		return () => this.handler(msg);
 	}
 }

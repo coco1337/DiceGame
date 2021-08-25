@@ -1,25 +1,45 @@
 using System;
 
 [Serializable]
+public sealed class WebMessage
+{
+	public EPacketId id;
+	public string msg;
+}
+
+[Serializable]
 public class WebPacket
 {
 	public EPacketId id;
 }
 
 [Serializable]
-public sealed class RollDiceReq : WebPacket
+public class Request : WebPacket
+{
+	public string sender;
+}
+
+[Serializable]
+public class Response : WebPacket
+{
+	public EError result;
+	public long tick;
+}
+
+[Serializable]
+public sealed class RollDiceReq : Request
 {
 	
 }
 
 [Serializable]
-public sealed class RollDiceRes : WebPacket
+public sealed class RollDiceRes : Response
 {
 	
 }
 
 [Serializable]
-public sealed class ChangeTurnNoti : WebPacket
+public sealed class ChangeTurnNoti : Response
 {
 	public int turn;
 }

@@ -23,7 +23,7 @@ public class DiceManager : MonoBehaviour
 		}
 
 		var packet = new RollDiceReq();
-		WebSocketManager.SendPacket(EPacketId.ROLL_DICE_REQUEST, packet);
+		WebSocketManager.SendPacket(packet);
 	}
 
 	public void CountAllDiceValues()

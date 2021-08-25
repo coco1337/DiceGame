@@ -22,7 +22,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	public static BlueMarbleManager Instance { get; private set; }
 	public int GetBoardSize => this.boardManager.CellList.Count;
-	public BoardCell GetCell(int index) => this.boardManager.CellList[index]; // ½ÃÀÛÁöÁ¡ µé¾î°¡¸é ¿À·ù°¡ÀÖÀ½. 2021.08.25
+	public BoardCell GetCell(int index) => this.boardManager.CellList[index]; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. 2021.08.25
 	public float PlayerHeightOffset { get; } = 1f;
 
 	private void Awake() => this.instance ??= this;
@@ -48,12 +48,34 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 		//if (playerList[turn].CurrentMoving) return;
 		//var result = dicemanager.totalValue;
-		//playerList[turn].MoveTo(dicemanager.totalValue); //¸ÖÆ¼
+		//playerList[turn].MoveTo(dicemanager.totalValue); //ï¿½ï¿½Æ¼
 		//dest = playerList[turn].dest;
-			this.rollDiceEvent?.Invoke(this.dicemanager.totalValue); // UIÃ¢ÀÌ ¹Ù·ÎÄÑÁö´Â°÷
+			this.rollDiceEvent?.Invoke(this.dicemanager.totalValue); // UIÃ¢ï¿½ï¿½ ï¿½Ù·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½
 			this.CurrentStep = ESteps.THROWING;
 
 		//if(turn == 0) { turn = 1; }
-		//else if (turn == 1) { turn = 0; }      ///// ÅÏÁ¦´Â ÇßÀ½ ´ë½Å ÀÌÁ¦ UImanager¿¡¼­ °°ÀÌ »ç¿ëµÇ´Â dest °°Àº°ÍµéÀ» ³ª´²Áà¾ßÇÔ.
+		//else if (turn == 1) { turn = 0; }      ///// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UImanagerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ dest ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	}
+
+	private void OnReceiveMessage(RollDiceRes msg)
+	{
+		if (msg.result == EError.SUCCESS)
+		{
+			RollDice();
+		}
+	}
+
+	public void RollDiceNet()
+	{
+		WebSocketManager.SendPacket(new RollDiceReq()
+		{
+			id = EPacketId.ROLL_DICE_REQUEST,
+			sender = "test roll dice",
+		});
+	}
+
+	private void AddHandlers()
+	{
+		WebSocketManager.AddHandler(EPacketId.ROLL_DICE_RESPONSE, new MessageHandler<RollDiceRes>(OnReceiveMessage));
 	}
 }

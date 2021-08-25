@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -15,7 +14,7 @@ public sealed class WebSocketManager : MonoBehaviour
 
 	private void Start()
 	{
-		#if UNITY_WEBGL
+#if UNITY_WEBGL
 		SendPacket("Test string");
 		#endif
 	}
@@ -28,9 +27,21 @@ public sealed class WebSocketManager : MonoBehaviour
 
 	public static void AddHandler(EPacketId packetId, IMessageHandler handler) => messageHandler.Add(packetId, handler);
 
-	public static void SendPacket(EPacketId packetId, WebPacket packet)
+	public static void SendPacket(WebPacket packet) => SendPacket(JsonConvert.SerializeObject(packet));
+
+	public void ReceiveWebMessage(string str)
 	{
-		
+		var message = JsonConvert.DeserializeObject<WebMessage>(str);
+
+		if (messageHandler.TryGetValue(message.id, out var handler))
+		{
+			var action = handler.MakeAction(message.msg);
+			action.Invoke();
+		}
+		else
+		{
+			D.Error("Try to access not registered handler. packet Id : " + message.id);
+		}
 	}
 
 	/*
