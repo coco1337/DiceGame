@@ -8596,8 +8596,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1725439549}
-  - component: {fileID: 1725439548}
-  - component: {fileID: 1725439550}
   - component: {fileID: 1725439551}
   m_Layer: 0
   m_Name: JsonTestManager
@@ -8606,18 +8604,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1725439548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725439547}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b777654129fb7e42a102787c3ac34fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1725439549
 Transform:
   m_ObjectHideFlags: 0
@@ -8632,18 +8618,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1725439550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725439547}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e231245bef599479b439adfb90a5de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1725439551
 MonoBehaviour:
   m_ObjectHideFlags: 0

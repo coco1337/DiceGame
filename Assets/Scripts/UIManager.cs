@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
 		this.dest = dest;
 
 		////특수칸 리스트
-		int[] specialDest = { 5, 15, 25, 35 };
+		int[] specialDest = { 5, 15, 25, 32, 35 };
 		var specialList = new List<int>();
 		specialList.AddRange(specialDest);
 		///
@@ -73,8 +73,11 @@ public class UIManager : MonoBehaviour
 		var keyList = new List<int>();
 		keyList.AddRange(keyDest);
 		///
-		
-		if (diceSum > 40) { Debug.Log("40넘김"); diceSum -= 40; }
+
+		if (diceSum >= 40) { 
+			Debug.Log("40넘김");
+			diceSum -= 40; 
+		}
 
 		if (keyList.Contains(diceSum)) { Debug.Log("열쇠칸"); }
 
@@ -82,7 +85,7 @@ public class UIManager : MonoBehaviour
 		{
 			SpecialBuyPopup();
 			//CsvReader.Instance.CsvTest(diceSum);
-			JsonManagers.Instance.Load(diceSum);
+			JsonManagers.Instance.Load3(diceSum);
 		}
 
 		else if (this.diceSum == 10)
@@ -95,7 +98,7 @@ public class UIManager : MonoBehaviour
 		{
 			BuildingBuyPopup();
 			//CsvReader.Instance.CsvTest(diceSum);
-			JsonManagers.Instance.Load(diceSum);
+			JsonManagers.Instance.Load3(diceSum);
 		}
 	}
 
@@ -128,7 +131,7 @@ public class UIManager : MonoBehaviour
 		var buildStatus = this.cell.GetBuildStatus;
 		for (int i = 0; i < this.toggleCheck.Count; i++)
 		{
-			
+
 			if (this.toggleCheck[i].isOn)
 			{
 				//this.sum += int.Parse(this.textPrice[i].text);
@@ -137,9 +140,9 @@ public class UIManager : MonoBehaviour
 			else
 			{
 				buildStatus[i] = false;
-			}	
+			}
 		}
-		
+
 		cell.BuildingOn(buildStatus);
 		Buy();
 		BuildingBuyOff();

@@ -32,7 +32,7 @@ public sealed class PlayerInfo : MonoBehaviour
 		Debug.Log(this.dest);
 	}
 
-	private IEnumerator CMoveAnimation(int destination, Action temp)
+	private IEnumerator CMoveAnimation(int destination, Action temp) // 0번쨰칸 수정해야할곳
 	{
 		this.CurrentMoving = true;
 		while (this.currentIndex != destination)

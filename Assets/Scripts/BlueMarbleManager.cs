@@ -22,7 +22,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	public static BlueMarbleManager Instance { get; private set; }
 	public int GetBoardSize => this.boardManager.CellList.Count;
-	public BoardCell GetCell(int index) => this.boardManager.CellList[index];
+	public BoardCell GetCell(int index) => this.boardManager.CellList[index]; // 시작지점 들어가면 오류가있음. 2021.08.25
 	public float PlayerHeightOffset { get; } = 1f;
 
 	private void Awake() => this.instance ??= this;

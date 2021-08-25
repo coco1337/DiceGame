@@ -45,7 +45,7 @@ public class JsonManagers : MonoBehaviour
 		string Jsonstring = File.ReadAllText(Application.dataPath + "/Resources/BuildingJson.json");
 		JsonData buildingData = JsonMapper.ToObject(Jsonstring);
 
-		var number = x-1;
+		var number = x - 1;
 
 		if (number == 4 || number == 14 || number == 24)
 		{
@@ -58,21 +58,23 @@ public class JsonManagers : MonoBehaviour
 		}
 	}
 
-	public void Load2(int x)
+	public void Load3(int x)
 	{
 		string json = File.ReadAllText(Application.dataPath + "/Resources/BuildingJson.json");
 		var buildingData = JsonConvert.DeserializeObject<Build[]>(json);
+		var number = x - 1;
 
-		for (int i = 0; i < buildingData.Length; ++i)
+		int[] specialDest = { 4, 14, 24, 31, 34 };
+		var specialList = new List<int>();
+		specialList.AddRange(specialDest);
+
+		if (specialList.Contains(number))
 		{
-			if (i == 4 || i == 14 || i == 24)
-			{
-				SpecialPrice2(i, buildingData[i]);
-			}
-			else
-			{
-				Price2(i, buildingData[i]);
-			}
+			SpecialPrice2(number, buildingData[number]);
+		}
+		else
+		{
+			Price2(number, buildingData[number]);
 		}
 	}
 
@@ -82,13 +84,9 @@ public class JsonManagers : MonoBehaviour
 		building.text = Data[a]["Building"].ToString();
 		villa.text = Data[a]["Villa"].ToString();
 		hotel.text = Data[a]["Hotel"].ToString();
-
-		Debug.Log(Data[a]["Country"].ToString());
-		Debug.Log(Data[a]["Land"].ToString());
-		Debug.Log(Data[a]["Building"].ToString());
 	}
 
-	private void Price2(int idx, Build data)
+	private void Price2(int idx, Build data) //¼­¿ï¸¸³ª¿È (?)
 	{
 		this.earthPrice.text = data.Land.ToString();
 		this.building.text = data.Building.ToString();
@@ -100,12 +98,9 @@ public class JsonManagers : MonoBehaviour
 	{
 		specialName.text = Data[a]["Country"].ToString();
 		specialPrice.text = Data[a]["Land"].ToString();
-
-		Debug.Log(Data[a]["Country"].ToString());
-		Debug.Log(Data[a]["Land"].ToString());
 	}
 
-	private void SpecialPrice2(int idx, Build data)
+	private void SpecialPrice2(int idx, Build data)  // ºÎ»ê¸¸³ª¿È(?)
 	{
 		this.specialName.text = data.Country.ToString();
 		this.specialPrice.text = data.Land.ToString();
