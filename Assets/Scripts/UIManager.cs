@@ -34,6 +34,8 @@ public class UIManager : MonoBehaviour
 	private void Awake()
 	{
 		this.bmm.rollDiceEvent.AddListener(BuildingBuyOn);
+		var num = Random.Range(0, 8);
+		D.Log(num.ToString());
 	}
 
 	private void Update()

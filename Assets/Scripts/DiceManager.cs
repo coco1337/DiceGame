@@ -60,3 +60,10 @@ public class DiceManager : MonoBehaviour
 		WebSocketManager.AddHandler(EPacketId.CHANGE_TURN_NOTI, new MessageHandler<ChangeTurnNoti>(OnReceivePacket));
 	}
 }
+
+/*
+ * DiceManager(RollDice!) 버튼 누르면  RollAllDice함수 실행 -> Dice스크립트에있는 AddForceToDice(주사위 돌아가는거) 실행  -> Dice에 UPDATE 를 통해 움직임을 파악
+ * 함수에 isRolling 을 true로 바꿔주고 움직임 IsSleeping 안움직이는걸 확인후 주사위 숫자가 CalculateValue 를 통해 파악함.
+ * Dice 함수에 있는 Event를 통해 DiceManager에 있는 CountAllDiceValue 를 통해 주사위 눈금 나옴 and 부루마블 매니저에있는 RollDice 실행
+ * 부루마블매니저 이벤트에 Add 해놓은 rollDiceEvent 에 주사위 눈금을 넣은 이벤트  MoveTO와 UIManager에 넣은 이벤트 2개 실행 
+ */

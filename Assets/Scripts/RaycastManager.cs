@@ -5,22 +5,6 @@ using UnityEngine;
 public class RaycastManager : MonoBehaviour
 {
 
-	private void Start()
-	{
-		int[] number = { 1, 3, 5, 7 };
-		var list = new List<int>();
-		list.AddRange(number);
-
-		if(list.Contains(5))
-		{
-			Debug.Log("5찾음");
-		}
-		else
-		{
-			Debug.Log("못찾");
-		}
-	}
-
 	private void Update()
 	{
 		if(Input.GetMouseButtonDown(0))
