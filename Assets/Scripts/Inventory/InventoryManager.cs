@@ -15,10 +15,10 @@ public class InventoryManager : MonoBehaviour
 		slots = slotParent.GetComponentsInChildren<Slot>();
 	}
 
-	private void Awake()
-	{
-		FreshSlot();
-	}
+	//private void Awake()
+	//{
+	//	FreshSlot();
+	//}
 
 	public void FreshSlot()
 	{
@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 	}
 	public void CardList()
 	{
-		cardItems.Add(new CardItem("dd", keyImage, 1));
+		cardItems.Add(new CardItem("dd", keyImage, 1)); // 수정할부분
 
 	}
 

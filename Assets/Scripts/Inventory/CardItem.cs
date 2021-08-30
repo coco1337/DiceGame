@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class CardItem : ScriptableObject
+public class CardItem
 {
 	public string itemName;
 	public Sprite ItemImage;
 	public int ItemIndex;
-	public CardItem(string aa, Sprite bb, int cc)
+	public CardItem(string Name, Sprite Image, int Index)
 	{
-		this.itemName = aa;
-		this.ItemImage = bb;
-		this.ItemIndex = cc;
+		this.itemName = Name;
+		this.ItemImage = Image;
+		this.ItemIndex = Index;
 	}
 }
