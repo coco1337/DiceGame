@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+	public List<CardItem> cardItems;
+
 	[SerializeField] private Transform slotParent;
 	[SerializeField] private Slot[] slots;
 	[SerializeField] private Sprite keyImage;
