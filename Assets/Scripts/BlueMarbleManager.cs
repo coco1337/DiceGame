@@ -57,14 +57,6 @@ public sealed class BlueMarbleManager : MonoBehaviour
 		//else if (turn == 1) { turn = 0; }      ///// ������ ���� ��� ���� UImanager���� ���� ���Ǵ� dest �����͵��� ���������.
 	}
 
-	private void OnReceiveMessage(RollDiceRes msg)
-	{
-		if (msg.result == EError.SUCCESS)
-		{
-			RollDice();
-		}
-	}
-
 	public void RollDiceNet()
 	{
 		WebSocketManager.SendPacket(new RollDiceReq()
@@ -76,6 +68,5 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	private void AddHandlers()
 	{
-		WebSocketManager.AddHandler(EPacketId.ROLL_DICE_RESPONSE, new MessageHandler<RollDiceRes>(OnReceiveMessage));
 	}
 }

@@ -5,7 +5,9 @@ using System.IO;
 using System.Net.WebSockets;
 using System.Runtime.InteropServices;
 using System.Text;
+#if UNITY_EDITOR
 using System.Threading;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,12 +26,21 @@ public sealed class WebSocketManager : MonoBehaviour
 	public void Test(string str)
 	{
 		this.uiText.text = str;
-		Debug.Log(nameof(Test) + " 이거 호출되긴함? " + str);
 	}
 
-	public static void AddHandler(EPacketId packetId, IMessageHandler handler) => messageHandler.Add(packetId, handler);
+	public static void AddHandler(EPacketId packetId, IMessageHandler handler)
+	{
+		if (messageHandler.ContainsKey(packetId))
+		{
+			D.Error("Try to add duplicated key in message handler");
+		}
+		else
+		{
+			messageHandler.Add(packetId, handler);
+		}
+	}
 
-	public static void SendPacket(WebPacket packet) => SendPacket(JsonConvert.SerializeObject(packet));
+	public static void SendPacket(WebPacket packet) => SendPacket(new PacketWrapper() {data = packet});
 
 	public void ReceiveWebMessage(string str)
 	{
@@ -61,24 +72,70 @@ Module['WebGLTest'].OnTest2 = function() {
 	private string host = "localhost";
 	private int port = 8080;
 	private static ClientWebSocket socket = new ClientWebSocket();
+	private Thread thread;
+	private bool listening;
 
 	private void Init()
 	{
-		var uri = new Uri("ws://" + this.host + this.port);
+		var uri = new Uri("wss://pi.coco1337.xyz:41000");
 		socket.ConnectAsync(uri, CancellationToken.None).Wait();
-		
-		
+		this.listening = true;
+		this.thread = new Thread(ListenLoop) {IsBackground = true};
+		this.thread.Start();
+	}
+
+	private async void ListenLoop()
+	{
+		while (this.listening)
+		{
+			using var ms = new MemoryStream();
+			while (socket.State == WebSocketState.Open)
+			{
+				WebSocketReceiveResult result;
+				do
+				{
+					if (!this.listening) return;
+					var buffer = WebSocket.CreateClientBuffer(4096, 4096);
+					result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+					ms.Write(buffer.Array, buffer.Offset, result.Count);
+				} while (!result.EndOfMessage);
+
+				if (result.MessageType == WebSocketMessageType.Text)
+				{
+					var str = Encoding.Default.GetString(ms.GetBuffer());
+					ReceiveWebMessage(str);
+				} 
+				else if (result.MessageType == WebSocketMessageType.Close)
+				{
+					this.listening = false;
+					await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, String.Empty, CancellationToken.None);
+					socket.Dispose();
+				}
+				
+				ms.SetLength(0);
+			}
+		}
+	}
+
+	public void OnApplicationQuit()
+	{
+		this.listening = false;
+		this.thread.Join();
+		socket?.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None).Wait();
+		socket?.Dispose();
 	}
 
 #endif
 	
 #if UNITY_WEBGL && !UNITY_EDITOR
 	[DllImport("__Internal")]
-	private static extern void SendPacket(string str);
+	private static extern void SendPacket(EPacketId id, string str);
 #else 
-	private static void SendPacket(string str)
+	private static void SendPacket(PacketWrapper packet)
 	{
+		var str = JsonConvert.SerializeObject(packet);
 		var arrSeg = new ArraySegment<byte>(Encoding.Default.GetBytes(str));
+		
 		socket.SendAsync(arrSeg, WebSocketMessageType.Text, true, CancellationToken.None).Wait();
 	}
 #endif

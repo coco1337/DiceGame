@@ -21,9 +21,6 @@ public class DiceManager : MonoBehaviour
 		{
 			t.AddForceToDice();
 		}
-
-		var packet = new RollDiceReq();
-		WebSocketManager.SendPacket(packet);
 	}
 
 	public void CountAllDiceValues()
@@ -46,7 +43,11 @@ public class DiceManager : MonoBehaviour
 
 	public void OnReceivePacket(RollDiceRes packet)
 	{
-		
+		D.Log("received packet : " + packet.result + ", " + packet.tick);
+		if (packet.result == EError.SUCCESS)
+		{
+			RollAllDice();
+		}
 	}
 
 	public void OnReceivePacket(ChangeTurnNoti packet)

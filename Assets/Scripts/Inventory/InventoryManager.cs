@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
 	}
 	public void CardList()
 	{
-		goldcardItem.Add(new CardItem("dd", keyImage, 1)); // ¼öÁ¤ÇÒºÎºĞ
+		goldcardItem.Add(new CardItem("dd", keyImage, 1)); // ìˆ˜ì •í• ë¶€ë¶„
 
 	}
 
@@ -50,7 +50,7 @@ public class InventoryManager : MonoBehaviour
 		}
 		else
 		{
-			D.Log("½½·Ô´ÙÂü");
+			D.Log("ìŠ¬ë¡¯ë‹¤ì°¸");
 		}
 	}
 
@@ -60,11 +60,11 @@ public class InventoryManager : MonoBehaviour
 		{
 			goldcardItem.Add(new CardItem(name, keyImage, index));
 			FreshSlot();
-			D.Log("Ä«µåÀÎº¥ µé¾î¿Ô´Ù!?");
+			D.Log("ì¹´ë“œì¸ë²¤ ë“¤ì–´ì™”ë‹¤!?");
 		}
 		else
 		{
-			D.Log("½½·Ô´ÙÂü");
+			D.Log("ìŠ¬ë¡¯ë‹¤ì°¸");
 		}
 	}
 

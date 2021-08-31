@@ -16,11 +16,13 @@ public class Slot : MonoBehaviour
 			if (cardItem != null)
 			{
 				image.sprite = this.PcardItem.ItemImage;
-				image.color = new Color(1, 1, 1, 1);
+				// image.color = new Color(1, 1, 1, 1);
+				this.image.enabled = true;
 			}
 			else
 			{
-				image.color = new Color(1, 1, 1, 0);
+				// image.color = new Color(1, 1, 1, 0);
+				this.image.enabled = false;
 			}
 		}
 	}

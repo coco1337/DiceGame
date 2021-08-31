@@ -24,7 +24,7 @@ public class CardJson : MonoBehaviour
 		//var CardData = JsonConvert.DeserializeObject<CardTemplates[]>(json);
 		JsonData CardData = JsonMapper.ToObject(json);
 		var cardRandom = Random.Range(0, 7);
-		Debug.Log(cardRandom.ToString()+ "Ä«µå¼ýÀÚ");
+		D.Log(cardRandom.ToString()+ "Ä«ï¿½ï¿½ï¿½ï¿½ï¿½");
 		RandomCard(cardRandom, CardData);
 		
 	}

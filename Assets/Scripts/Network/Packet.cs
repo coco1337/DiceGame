@@ -1,6 +1,13 @@
 using System;
 
 [Serializable]
+public sealed class PacketWrapper
+{
+	public string @event = "DiceGame";
+	public WebPacket data;
+}
+
+[Serializable]
 public sealed class WebMessage
 {
 	public EPacketId id;
@@ -35,7 +42,7 @@ public sealed class RollDiceReq : Request
 [Serializable]
 public sealed class RollDiceRes : Response
 {
-	
+	public int diceResult;
 }
 
 [Serializable]
