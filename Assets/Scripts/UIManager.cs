@@ -18,12 +18,14 @@ public class UIManager : MonoBehaviour
 	[SerializeField] public List<Toggle> toggleCheck;
 	[SerializeField] private List<Text> textPrice;
 
-	public DiceManager diceManager;
-	public TextMeshProUGUI valueText;
-	public Image buyImage;
-	public Image specialbuyImage;
+	[SerializeField] private DiceManager diceManager;
+	[SerializeField] private TextMeshProUGUI valueText;
+	[SerializeField] private Image buyImage;
+	[SerializeField] private Image specialbuyImage;
+	[SerializeField] private Image goldKeyImage;
 	public UnityEvent rollDicePlay;
 	private BoardCell cell;
+
 	public bool[] buildBool = new bool[4];
 
 	private int money;
@@ -53,35 +55,39 @@ public class UIManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 땅 및 건물 구매 UI 켜기
+	/// ??�?건물 구매 UI 켜기
 	/// </summary>
 	/// <param name="dest">int, destination</param>
 
-	// 열쇠 2,7,12,17,22,28,35,38
-	// 특수지역 5,15,25 ,35, 32
+	// ?�쇠 2,7,12,17,22,28,35,38
+	// ?�수지??5,15,25 ,35, 32
 
-	public void BuildingBuyOn(int dest)         /// 현재 유니티 이벤트 주사위값으로 나오는 문제있음. 수정해야함  아마 같은 이벤트에 넣어서 그런듯하다.
+	public void BuildingBuyOn(int dest)         /// ?�재 ?�니???�벤??주사?�값?�로 ?�오??문제?�음. ?�정?�야?? ?�마 같�? ?�벤?�에 ?�어??그런??��??
 	{
 		this.diceSum += dest;
 		this.dest = dest;
 
-		////특수칸 리스트
+		////?�수�?리스??
 		int[] specialDest = { 5, 15, 25, 32, 35 };
 		var specialList = new List<int>();
 		specialList.AddRange(specialDest);
 		///
-		///열쇠칸 리스트
+		///?�쇠�?리스??
 		int[] keyDest = { 2, 7, 12, 17, 22, 28, 35, 38 };
 		var keyList = new List<int>();
 		keyList.AddRange(keyDest);
 		///
 
 		if (diceSum >= 40) { 
-			Debug.Log("40넘김");
+			Debug.Log("40?��?");
 			diceSum -= 40; 
 		}
 
-		if (keyList.Contains(diceSum)) { Debug.Log("열쇠칸"); }
+		if (keyList.Contains(diceSum)) 
+		{
+			GoldCardKeyPopup();
+			CardJson.Instance.CardLoad();
+		}
 
 		else if (specialList.Contains(diceSum))
 		{
@@ -106,7 +112,7 @@ public class UIManager : MonoBehaviour
 
 	public void BuildingBuyOff()
 	{
-		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE; //현재상태
+		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE; //?�재?�태
 		Debug.Log(BlueMarbleManager.Instance.CurrentStep);
 		this.buyImage.gameObject.SetActive(false);
 	}
@@ -117,10 +123,16 @@ public class UIManager : MonoBehaviour
 		this.specialbuyImage.gameObject.SetActive(true);
 	}
 
+	private void GoldCardKeyPopup()
+	{
+		this.cell = this.bmm.GetCell(this.diceSum);
+		this.goldKeyImage.gameObject.SetActive(true);
+	}
+
 	private void BuildingBuyPopup()
 	{
-		this.cell = this.bmm.GetCell(this.diceSum);  // 부루마블에 있는 getCell에 dest(주사위값들)을 넣어줘서 플레이어 위치가 보드 어느위치인지 나오게함 (dest에서 diceSum으로 변경)
-		var buildStatus = this.cell.GetBuildStatus; // BoardCell에 있는 GetBuildStatus 의 bool타입 가져옴
+		this.cell = this.bmm.GetCell(this.diceSum);  // 부루마블에 ?�는 getCell??dest(주사?�값?????�어줘서 ?�레?�어 ?�치가 보드 ?�느?�치?��? ?�오게함 (dest?�서 diceSum?�로 변�?
+		var buildStatus = this.cell.GetBuildStatus; // BoardCell???�는 GetBuildStatus ??bool?�??가?�옴
 		this.buyImage.gameObject.SetActive(true);
 		for (int i = 0; i < buildStatus.Length; ++i)
 		{
@@ -128,7 +140,7 @@ public class UIManager : MonoBehaviour
 			this.toggleCheck[i].isOn = buildStatus[i] == false;
 		}
 	}
-	public void OnClickBuyButton() // 토글 체크후 내 자산에서 건물값 지불
+	public void OnClickBuyButton() // ?��? 체크?????�산?�서 건물�?지�?
 	{
 		var buildStatus = this.cell.GetBuildStatus;
 		for (int i = 0; i < this.toggleCheck.Count; i++)
@@ -150,9 +162,14 @@ public class UIManager : MonoBehaviour
 		BuildingBuyOff();
 	}
 
+	public void GoldCardESCOff()
+	{
+		this.goldKeyImage.gameObject.SetActive(false);
+	}
+
 	public void SpecialBuildingBuyOff()
 	{
-		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE; //현재상태
+		BlueMarbleManager.Instance.CurrentStep = ESteps.NONE; //?�재?�태
 		Debug.Log(BlueMarbleManager.Instance.CurrentStep);
 		this.specialbuyImage.gameObject.SetActive(false);
 	}
@@ -185,7 +202,3 @@ public class UIManager : MonoBehaviour
 		sum = 0;
 	}
 }
-
-//다음 해봐야할거 : csv 사용해서 땅마다 이름, 건물 가격 가져오는거 해보기.
-
-//0817 건물 지어진곳 체크못하게 막아논건 됬지만 그대로 체크상태이기 떄문에 값이 나가는 오류가 있음. 변경해야함.

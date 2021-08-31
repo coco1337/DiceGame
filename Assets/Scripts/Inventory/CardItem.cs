@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardItem
+public class CardItem : MonoBehaviour
 {
 	public string itemName;
 	public Sprite ItemImage;
