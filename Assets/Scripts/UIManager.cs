@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
 	// ?´ì‡  2,7,12,17,22,28,35,38
 	// ?¹ìˆ˜ì§€??5,15,25 ,35, 32
 
-	public void BuildingBuyOn(int dest)         /// ?„ì¬ ? ë‹ˆ???´ë²¤??ì£¼ì‚¬?„ê°’?¼ë¡œ ?˜ì˜¤??ë¬¸ì œ?ˆìŒ. ?˜ì •?´ì•¼?? ?„ë§ˆ ê°™ì? ?´ë²¤?¸ì— ?£ì–´??ê·¸ëŸ°??•˜??
+	public void BuildingBuyOn(int dest)        
 	{
 		this.diceSum += dest;
 		this.dest = dest;

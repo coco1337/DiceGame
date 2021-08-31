@@ -16,10 +16,10 @@ public sealed class BoardCell : MonoBehaviour
 	[SerializeField] private GameObject estate;
 	
 	/// <summary>
-	/// [0] : 소유 여부
+	/// [0] : ?�유 ?��?
 	/// [1] : 빌딩
 	/// [2] : 빌라
-	/// [3] : 호텔
+	/// [3] : ?�텔
 	/// </summary>
 	[SerializeField] private bool[] buildArray = new bool[4];
 	private float moveSpeed;
@@ -45,7 +45,7 @@ public sealed class BoardCell : MonoBehaviour
 	{
 		for(int i=0; i<bo.Length; i++)
 		{
-			if( i==0&& bo[0]) { Debug.Log("색넣는곳"); }
+			if( i==0&& bo[0]) { Debug.Log("?�넣?�곳"); }
 			else if (i == 1 && bo[1]) { this.building.SetActive(true); }
 			else if (i == 2 && bo[2]) { this.villa.SetActive(true); }
 			else if (i == 3 && bo[3]) { this.hotel.SetActive(true); }

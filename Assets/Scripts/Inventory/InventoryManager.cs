@@ -11,15 +11,9 @@ public class InventoryManager : MonoBehaviour
 
 	public static InventoryManager Instance { get; private set; }
 
-	private void OnValidate()
-	{
-		slots = slotParent.GetComponentsInChildren<Slot>();
-	}
-
 	private void Awake()
 	{
 		Instance ??= this;
-		//FreshSlot();
 	}
 
 	public void FreshSlot()
@@ -37,7 +31,8 @@ public class InventoryManager : MonoBehaviour
 	}
 	public void CardList()
 	{
-		goldcardItem.Add(new CardItem("dd", keyImage, 1)); // 수정할부분
+		CardItem abc = new CardItem("dd", 1);
+		goldcardItem.Add(abc);
 
 	}
 
@@ -50,7 +45,7 @@ public class InventoryManager : MonoBehaviour
 		}
 		else
 		{
-			D.Log("슬롯다참");
+			D.Log("?щ’ ?ㅼ갭");
 		}
 	}
 
@@ -58,20 +53,19 @@ public class InventoryManager : MonoBehaviour
 	{
 		if (goldcardItem.Count < slots.Length)
 		{
-			goldcardItem.Add(new CardItem(name, keyImage, index));
+			goldcardItem.Add(new CardItem(name, index));
 			FreshSlot();
-			D.Log("카드인벤 들어왔다!?");
 		}
 		else
 		{
-			D.Log("슬롯다참");
+			D.Log("?щ’?ㅼ갭");
 		}
 	}
 
 	public void DeleteItem()
 	{
 		D.Log(goldcardItem[0].ItemIndex.ToString());
-		D.Log(goldcardItem[0].ItemImage.ToString());
+		D.Log(goldcardItem[0].itemName.ToString());
 		goldcardItem.Remove(goldcardItem[0]); //
 		FreshSlot();
 	}

@@ -24,7 +24,7 @@ public sealed class WebSocketManager : MonoBehaviour
 	public void Test(string str)
 	{
 		this.uiText.text = str;
-		Debug.Log(nameof(Test) + " 이거 호출되긴함? " + str);
+		Debug.Log(nameof(Test) + " ?�거 ?�출?�긴?? " + str);
 	}
 
 	public static void AddHandler(EPacketId packetId, IMessageHandler handler) => messageHandler.Add(packetId, handler);

@@ -1,104 +1,104 @@
 [
    {
-      "Country":"타이베이",
+      "Country":"?�?�베??,
       "Land":2000,
       "Building":10000,
       "Villa":90000,
       "Hotel":250000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"베이징",
+      "Country":"베이�?,
       "Land":4000,
       "Building":20000,
       "Villa":180000,
       "Hotel":450000
    },
    {
-      "Country":"마닐라",
+      "Country":"마닐??,
       "Land":4000,
       "Building":20000,
       "Villa":180000,
       "Hotel":450000
    },
    {
-      "Country":"제주도",
+      "Country":"?�주??,
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"싱가포르",
+      "Country":"?��??�르",
       "Land":6000,
       "Building":30000,
       "Villa":270000,
       "Hotel":550000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"카이로",
+      "Country":"카이�?,
       "Land":6000,
       "Building":30000,
       "Villa":270000,
       "Hotel":550000
    },
    {
-      "Country":"이스탄불",
+      "Country":"?�스?�불",
       "Land":8000,
       "Building":40000,
       "Villa":300000,
       "Hotel":600000
    },
    {
-      "Country":"사회복지",
+      "Country":"?�회복�?",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"아테네",
+      "Country":"?�테??,
       "Land":10000,
       "Building":50000,
       "Villa":450000,
       "Hotel":750000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"코펜하겐",
+      "Country":"코펜?�겐",
       "Land":12000,
       "Building":60000,
       "Villa":500000,
       "Hotel":900000
    },
    {
-      "Country":"스톡홀름",
+      "Country":"?�톡?��?,
       "Land":12000,
       "Building":60000,
       "Villa":500000,
       "Hotel":900000
    },
    {
-      "Country":"콩코드",
+      "Country":"콩코??,
       "Land":0,
       "Building":0,
       "Villa":0,
@@ -112,84 +112,84 @@
       "Hotel":950000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"베를린",
+      "Country":"베�?�?,
       "Land":14000,
       "Building":70000,
       "Villa":500000,
       "Hotel":950000
    },
    {
-      "Country":"오타와",
+      "Country":"?��??�",
       "Land":16000,
       "Building":80000,
       "Villa":550000,
       "Hotel":1000000
    },
    {
-      "Country":"무인도",
+      "Country":"무인??,
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"부에노스아이레스",
+      "Country":"부?�노?�아?�레??,
       "Land":18000,
       "Building":90000,
       "Villa":700000,
       "Hotel":1050000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"상파울로",
+      "Country":"?�파?�로",
       "Land":20000,
       "Building":100000,
       "Villa":750000,
       "Hotel":1100000
    },
    {
-      "Country":"시드니",
+      "Country":"?�드??,
       "Land":20000,
       "Building":100000,
       "Villa":750000,
       "Hotel":1100000
    },
    {
-      "Country":"부산",
+      "Country":"부??,
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"하와이",
+      "Country":"?��???,
       "Land":22000,
       "Building":110000,
       "Villa":800000,
       "Hotel":1150000
    },
    {
-      "Country":"리스본",
+      "Country":"리스�?,
       "Land":22000,
       "Building":110000,
       "Villa":800000,
       "Hotel":1150000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
@@ -203,28 +203,28 @@
       "Hotel":1200000
    },
    {
-      "Country":"우주여행",
+      "Country":"?�주?�행",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"도쿄",
+      "Country":"?�쿄",
       "Land":26000,
       "Building":130000,
       "Villa":900000,
       "Hotel":1270000
    },
    {
-      "Country":"컬럼비아호",
+      "Country":"컬럼비아??,
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"파리",
+      "Country":"?�리",
       "Land":28000,
       "Building":150000,
       "Villa":1000000,
@@ -238,35 +238,35 @@
       "Hotel":1400000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"런던",
+      "Country":"?�던",
       "Land":35000,
       "Building":170000,
       "Villa":1100000,
       "Hotel":1500000
    },
    {
-      "Country":"뉴욕",
+      "Country":"?�욕",
       "Land":35000,
       "Building":170000,
       "Villa":1100000,
       "Hotel":1500000
    },
    {
-      "Country":"열쇠",
+      "Country":"?�쇠",
       "Land":0,
       "Building":0,
       "Villa":0,
       "Hotel":0
    },
    {
-      "Country":"서울",
+      "Country":"?�울",
       "Land":40000,
       "Building":200000,
       "Villa":1500000,

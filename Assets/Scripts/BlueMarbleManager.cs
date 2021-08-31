@@ -22,7 +22,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 
 	public static BlueMarbleManager Instance { get; private set; }
 	public int GetBoardSize => this.boardManager.CellList.Count;
-	public BoardCell GetCell(int index) => this.boardManager.CellList[index]; // �������� ���� ����������. 2021.08.25
+	public BoardCell GetCell(int index) => this.boardManager.CellList[index]; // �������� ����?����������. 2021.08.25
 	public float PlayerHeightOffset { get; } = 1f;
 
 	private void Awake() => this.instance ??= this;
@@ -54,7 +54,7 @@ public sealed class BlueMarbleManager : MonoBehaviour
 			this.CurrentStep = ESteps.THROWING;
 
 		//if(turn == 0) { turn = 1; }
-		//else if (turn == 1) { turn = 0; }      ///// ������ ���� ��� ���� UImanager���� ���� ���Ǵ� dest �����͵��� ���������.
+		//else if (turn == 1) { turn = 0; }      ///// ������ ���� ���?���� UImanager���� ���� ���Ǵ� dest �����͵��� ���������?
 	}
 
 	private void OnReceiveMessage(RollDiceRes msg)
