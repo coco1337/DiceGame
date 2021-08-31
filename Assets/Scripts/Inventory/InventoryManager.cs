@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+	public List<CardItem> cardItems;
+
 	[SerializeField] private Transform slotParent;
 	[SerializeField] private Slot[] slots;
 	[SerializeField] private Sprite keyImage;
@@ -31,8 +33,12 @@ public class InventoryManager : MonoBehaviour
 	}
 	public void CardList()
 	{
+<<<<<<< HEAD
 		CardItem abc = new CardItem("dd", 1);
 		goldcardItem.Add(abc);
+=======
+		goldcardItem.Add(new CardItem("dd", keyImage, 1)); // 수정할부분
+>>>>>>> 9e761739e8427872bbc07f5ebe437a46c99a3c97
 
 	}
 
@@ -45,7 +51,11 @@ public class InventoryManager : MonoBehaviour
 		}
 		else
 		{
+<<<<<<< HEAD
 			D.Log("?�롯 ?�참");
+=======
+			D.Log("슬롯다참");
+>>>>>>> 9e761739e8427872bbc07f5ebe437a46c99a3c97
 		}
 	}
 
@@ -55,10 +65,18 @@ public class InventoryManager : MonoBehaviour
 		{
 			goldcardItem.Add(new CardItem(name, index));
 			FreshSlot();
+<<<<<<< HEAD
 		}
 		else
 		{
 			D.Log("?�롯?�참");
+=======
+			D.Log("카드인벤 들어왔다!?");
+		}
+		else
+		{
+			D.Log("슬롯다참");
+>>>>>>> 9e761739e8427872bbc07f5ebe437a46c99a3c97
 		}
 	}
 
