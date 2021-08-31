@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-	public List<CardItem> cardItems;
-
 	[SerializeField] private Transform slotParent;
 	[SerializeField] private Slot[] slots;
 	[SerializeField] private Sprite keyImage;
+	[SerializeField] public List<CardItem> goldcardItem;
+
+	public static InventoryManager Instance { get; private set; }
 
 	private void OnValidate()
 	{
 		slots = slotParent.GetComponentsInChildren<Slot>();
 	}
 
-	//private void Awake()
-	//{
-	//	FreshSlot();
-	//}
+	private void Awake()
+	{
+		Instance ??= this;
+		//FreshSlot();
+	}
 
 	public void FreshSlot()
 	{
 		int i = 0;
-		for (; i < cardItems.Count && i < slots.Length; i++)
+		for (; i < goldcardItem.Count && i < slots.Length; i++)
 		{
-			slots[i].PcardItem = cardItems[i];
+			slots[i].PcardItem = goldcardItem[i];
 		}
 
 		for (; i < slots.Length; i++)
@@ -35,13 +37,13 @@ public class InventoryManager : MonoBehaviour
 	}
 	public void CardList()
 	{
-		cardItems.Add(new CardItem("dd", keyImage, 1)); // 수정할부분
+		goldcardItem.Add(new CardItem("dd", keyImage, 1)); // 수정할부분
 
 	}
 
 	public void AddItem()
 	{
-		if (cardItems.Count < slots.Length)
+		if (goldcardItem.Count < slots.Length)
 		{
 			CardList();
 			FreshSlot();
@@ -52,9 +54,25 @@ public class InventoryManager : MonoBehaviour
 		}
 	}
 
+	public void AddItems(string name, int index)
+	{
+		if (goldcardItem.Count < slots.Length)
+		{
+			goldcardItem.Add(new CardItem(name, keyImage, index));
+			FreshSlot();
+			D.Log("카드인벤 들어왔다!?");
+		}
+		else
+		{
+			D.Log("슬롯다참");
+		}
+	}
+
 	public void DeleteItem()
 	{
-		cardItems.Remove(cardItems[0]); //
+		D.Log(goldcardItem[0].ItemIndex.ToString());
+		D.Log(goldcardItem[0].ItemImage.ToString());
+		goldcardItem.Remove(goldcardItem[0]); //
 		FreshSlot();
 	}
 }
