@@ -26,10 +26,6 @@ public sealed class WebSocketManager : MonoBehaviour
 	public void Test(string str)
 	{
 		this.uiText.text = str;
-<<<<<<< HEAD
-		Debug.Log(nameof(Test) + " ?´ê±° ?¸ì¶œ?˜ê¸´?? " + str);
-=======
->>>>>>> 9e761739e8427872bbc07f5ebe437a46c99a3c97
 	}
 
 	public static void AddHandler(EPacketId packetId, IMessageHandler handler)
