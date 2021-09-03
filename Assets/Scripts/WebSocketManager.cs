@@ -77,7 +77,7 @@ Module['WebGLTest'].OnTest2 = function() {
 
 	private void Init()
 	{
-		var uri = new Uri("wss://pi.coco1337.xyz:41000");
+		var uri = new Uri("ws://localhost:8080");
 		socket.ConnectAsync(uri, CancellationToken.None).Wait();
 		this.listening = true;
 		this.thread = new Thread(ListenLoop) {IsBackground = true};
@@ -128,6 +128,8 @@ Module['WebGLTest'].OnTest2 = function() {
 #endif
 	
 #if UNITY_WEBGL && !UNITY_EDITOR
+	private static void SendPacket(PacketWrapper packet) => SendPacket(packet.data.id, JsonConvert.SerializeObject(packet.data));	
+	
 	[DllImport("__Internal")]
 	private static extern void SendPacket(EPacketId id, string str);
 #else 
