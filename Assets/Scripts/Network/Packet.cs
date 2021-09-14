@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 
 [Serializable]
 public sealed class PacketWrapper
@@ -31,6 +32,36 @@ public class Response : WebPacket
 {
 	public EError result;
 	public long tick;
+}
+
+[Serializable]
+public sealed class CreateRoomReq : Request
+{
+	
+}
+
+[Serializable]
+public sealed class CreateRoomRes : Response
+{
+	public string roomId;
+}
+
+[Serializable]
+public sealed class JoinRandomRoomReq : Request
+{
+	public string roomId;
+}
+
+[Serializable]
+public sealed class PlayerJoinNoti : Response
+{
+	public string playerGuid;
+}
+
+[Serializable]
+public sealed class StartGameNoti : Response
+{
+	
 }
 
 [Serializable]

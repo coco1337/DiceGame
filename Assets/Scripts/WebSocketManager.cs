@@ -18,6 +18,7 @@ public sealed class WebSocketManager : MonoBehaviour
 
 	private void Start()
 	{
+			DontDestroyOnLoad(this);
 #if UNITY_EDITOR
 		Init();
 #endif
